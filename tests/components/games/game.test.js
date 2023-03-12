@@ -35,9 +35,21 @@ test('Cannot start game (throw exception) when players have same stone color', (
   expect(() => game.start()).toThrow(Error);
 });
 
-// test('Select current player on start game', () => {
-//   const game = new Game();
-//   expect(game.currentPlayer).toBe(null);
-//   game.start();
-//   expect(game.currentPlayer).not.toBe(null);
-// });
+test('Select current player on start game', () => {
+  const game = new Game();
+  expect(game.currentPlayer).toBe(null);
+  const player1 = new Player('Player 1', 'Black');
+  const player2 = new Player('Player 2', 'White');
+  game.addPlayers(player1, player2);
+  game.start();
+  expect(game.currentPlayer).toBe(player1);
+});
+
+test('Cannot start game (throw exceotion) when any players not have black stone color', () => {
+  const game = new Game();
+  expect(game.currentPlayer).toBe(null);
+  const player1 = new Player('Player 1', 'Red');
+  const player2 = new Player('Player 2', 'White');
+  game.addPlayers(player1, player2);
+  expect(() => game.start()).toThrow(Error);
+});
