@@ -8,6 +8,9 @@ class Game {
     if (!this.player1 || !this.player2) {
       throw new Error('Can not start game without players initialization');
     }
+    if (this.player1.stoneColor === this.player2.stoneColor) {
+      throw new Error('Can not start game if players have the same stone colors');
+    }
     
     this.field = new Field();
   }
