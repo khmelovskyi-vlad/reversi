@@ -1,7 +1,7 @@
 class Field {
-    cells = Array.from(Array(64).keys());
+    cells = [];
     create(){
-
+        this.cells = Array.from(Array(64).keys());
     }
 }
 
