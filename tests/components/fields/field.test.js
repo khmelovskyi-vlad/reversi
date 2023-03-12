@@ -20,3 +20,9 @@ test('field must create cells with correct indexes', () => {
   }
   expect(includesAll).toBe(true);
 });
+
+test('field must create empty cells', () => {
+  const field = new Field();
+  field.create();
+  expect(field.cells.some(cell => !cell.isEmpty)).toBe(false);
+});
