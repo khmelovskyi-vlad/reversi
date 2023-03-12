@@ -26,3 +26,9 @@ test('field must create empty cells', () => {
   field.create();
   expect(field.cells.some(cell => !cell.isEmpty)).toBe(false);
 });
+
+test('field must create cells without players', () => {
+  const field = new Field();
+  field.create();
+  expect(field.cells.some(cell => cell.player !== null)).toBe(false);
+});
