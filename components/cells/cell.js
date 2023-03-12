@@ -1,4 +1,6 @@
 class Cell {
+  player = null;
+
   constructor(x, y){
     this.x = x;
     this.y = y;
@@ -8,7 +10,13 @@ class Cell {
     return !this.player;
   };
 
-  player = null;
+  fill(player){
+    if (this.player === player) {
+      throw new Error('Cannot fill cell with same player');
+    }
+
+    this.player = player;
+  }
 }
 
 module.exports = Cell;

@@ -46,11 +46,62 @@ test('Select current player on start game', () => {
   expect(game.currentPlayer).toBe(player1);
 });
 
-test('Cannot start game (throw exceotion) when any players not have first move', () => {
+test('Cannot start game (throw exception) when any players not have first move', () => {
   const game = new Game();
-  expect(game.currentPlayer).toBe(null);
   const player1 = new Player('Player 1', new StoneColor('red'));
   const player2 = new Player('Player 2', StoneColor.white);
   game.addPlayers(player1, player2);
   expect(() => game.start()).toThrow(Error);
+});
+
+test('Cannot move (throw exception) if game was not started', () => {
+  const game = new Game();
+  const player1 = new Player('Player 1', StoneColor.black);
+  const player2 = new Player('Player 2', StoneColor.white);
+  game.addPlayers(player1, player2); 
+  expect(() => game.move()).toThrow(Error);
+});
+
+test('Change current player after move', () => {
+  const game = new Game();
+  const player1 = new Player('Player 1', StoneColor.black);
+  const player2 = new Player('Player 2', StoneColor.white);
+  game.addPlayers(player1, player2);
+  game.start();
+  game.move(0, 0);
+  expect(game.currentPlayer).toBe(player2);
+});
+
+test('Cell with selected coordinates must fill current user', () => {
+  const game = new Game();
+  const player1 = new Player('Player 1', StoneColor.black);
+  const player2 = new Player('Player 2', StoneColor.white);
+  game.addPlayers(player1, player2); 
+  game.start();
+  const x = 0;
+  const y = 0;
+  game.move(x, y);
+  const cell = game.field.cells.find(cell => cell.x === x && cell.y === y);
+  expect(cell).not.toBe(null);
+  expect(cell.player).toBe(player1);
+});
+
+test('Change current player must change player to another', () => {
+  const game = new Game();
+  const player1 = new Player('Player 1', StoneColor.black);
+  const player2 = new Player('Player 2', StoneColor.white);
+  game.addPlayers(player1, player2); 
+  game.start();
+  game.changeCurrentPlayer();
+  expect(game.currentPlayer).toBe(player2);
+});
+
+test('Change current player without players must throw exception', () => {
+  const game = new Game();
+  const player1 = new Player('Player 1', StoneColor.black);
+  const player2 = new Player('Player 2', StoneColor.white);
+  game.addPlayers(player1, player2); 
+  game.start();
+  game.player1 = new Player('Player 3', StoneColor.black);
+  expect(() => game.changeCurrentPlayer()).toThrow(Error);
 });

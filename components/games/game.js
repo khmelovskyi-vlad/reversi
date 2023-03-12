@@ -5,6 +5,7 @@ class Game {
   currentPlayer = null;
   player1 = null;
   player2 = null;
+  gameWasStarted = false;
 
   start(){
     if (!this.player1 || !this.player2) {
@@ -16,6 +17,7 @@ class Game {
     
     this.field = new Field();
     this.currentPlayer = this.selectFirstPlayer();
+    this.gameWasStarted = true;
   }
 
   addPlayers(player1, player2){
@@ -32,6 +34,26 @@ class Game {
     }
     
     throw new Error('No players is with first move');
+  }
+
+  move(x, y){
+    if (!this.gameWasStarted) {
+      throw new Error('Cannot move if game was not started');
+    }
+    this.field.fillCell(x, y, this.currentPlayer);
+    this.changeCurrentPlayer();
+  }
+
+  changeCurrentPlayer(){
+    if (this.currentPlayer === this.player1) {
+      this.currentPlayer = this.player2;
+    }
+    else if (this.currentPlayer === this.player2) {
+      this.currentPlayer = this.player1;
+    }
+    else{
+      throw new Error('Cannot change current player because existing players is not the same');
+    }
   }
 }
 

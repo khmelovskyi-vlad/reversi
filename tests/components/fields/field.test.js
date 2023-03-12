@@ -1,15 +1,14 @@
 const Field = require('../../../components/fields/field');
+const Player = require('../../../components/players/player');
+const StoneColor = require('../../../components/stoneColors/stoneColor');
 
 test('field must create 64 cells', () => {
   const field = new Field();
-  expect(field.cells.length).toBe(0);
-  field.create();
   expect(field.cells.length).toBe(64);
 });
 
 test('field must create cells with correct indexes', () => {
   const field = new Field();
-  field.create();
   let includesAll = true;
   for (let i = 0; i < 8; i++) {
     for (let j = 0; j < 8; j++) {
@@ -23,12 +22,24 @@ test('field must create cells with correct indexes', () => {
 
 test('field must create empty cells', () => {
   const field = new Field();
-  field.create();
   expect(field.cells.some(cell => !cell.isEmpty)).toBe(false);
 });
 
 test('field must create cells without players', () => {
   const field = new Field();
-  field.create();
   expect(field.cells.some(cell => cell.player !== null)).toBe(false);
+});
+
+test('On fill cell if cell with selected coordinates is not exist throw exception', () => {
+  const field = new Field();
+  expect(() => field.fillCell(0, 9, new Player('Player', StoneColor.black))).toThrow(Error);
+});
+
+test('If cell with selected coordinates was filled current player throw exception', () => {
+  const field = new Field();
+  const x = 0;
+  const y = 0;
+  const player = new Player('Player', StoneColor.black);
+  field.fillCell(x, y, player);
+  expect(() => field.fillCell(x, y, player)).toThrow(Error);
 });
