@@ -5,6 +5,10 @@ class Game {
   player1 = null;
   player2 = null;
   start(){
+    if (!this.player1 || !this.player2) {
+      throw new Error('Can not start game without players initialization');
+    }
+    
     this.field = new Field();
   }
   addPlayers(player1, player2){
