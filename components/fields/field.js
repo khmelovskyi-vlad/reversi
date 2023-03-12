@@ -1,7 +1,11 @@
 class Field {
     cells = [];
     create(){
-        this.cells = Array.from(Array(64).keys());
+        for (let i = 0; i < 8; i++) {
+            for (let j = 0; j < 8; j++) {
+                this.cells.push({x: i, y: j});
+            }
+        }
     }
 }
 
