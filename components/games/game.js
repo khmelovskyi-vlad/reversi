@@ -24,14 +24,14 @@ class Game {
   }
 
   selectFirstPlayer(){
-    if (this.player1.stoneColor === 'Black') {
+    if (this.player1.stoneColor.isPlayerFirstMove) {
       return this.player1;
     }
-    else if(this.player1.stoneColor === 'Black'){
+    else if(this.player2.stoneColor.isPlayerFirstMove){
       return this.player2;
     }
     
-    throw new Error('No players have black stone color');
+    throw new Error('No players is with first move');
   }
 }
 
