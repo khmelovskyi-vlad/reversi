@@ -20,6 +20,11 @@ test('empty cell must have some indexes', () => {
   const x = 1;
   const y = 2;
   const cell = new Cell(x, y);
+  const x2 = 3;
+  const y2 = 4;
+  const cell2 = new Cell(x2, y2);
   expect(cell.x).toBe(x);
   expect(cell.y).toBe(y);
+  expect(cell2.x).toBe(x2);
+  expect(cell2.y).toBe(y2);
 });

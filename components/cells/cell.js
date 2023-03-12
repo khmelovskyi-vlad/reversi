@@ -1,7 +1,7 @@
 class Cell {
-  constructor(){
-    this.x = 1;
-    this.y = 2;
+  constructor(x, y){
+    this.x = x;
+    this.y = y;
   }
 
   get isEmpty(){
