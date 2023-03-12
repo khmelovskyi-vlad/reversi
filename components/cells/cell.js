@@ -1,5 +1,8 @@
 class Cell {
-  isEmpty = true;
+  get isEmpty(){
+    return !this.player;
+  };
+
   player = null;
 }
 

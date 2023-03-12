@@ -9,3 +9,9 @@ test('new cell must be without player', () => {
   const cell = new Cell();
   expect(cell.player).toBe(null);
 });
+
+test('empty cell can not have player', () => {
+  const cell = new Cell();
+  cell.player = "Player"
+  expect(cell.isEmpty).toBe(false);
+});
