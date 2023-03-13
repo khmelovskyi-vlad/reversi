@@ -21,6 +21,9 @@ class Game {
   }
 
   addPlayers(player1, player2){
+    if (!player1 || !player2) {
+      throw new Error('Can not add null players');
+    }
     this.player1 = player1;
     this.player2 = player2;
   }

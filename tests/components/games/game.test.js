@@ -22,6 +22,13 @@ test('Add two players to game', () => {
   expect(game.player2).toBe(player2);
 });
 
+test('Cannot add null players (throw error)', () => {
+  const game = new Game();
+  expect(() => game.addPlayers()).toThrow(Error);
+  expect(() => game.addPlayers(PlayerTestFactory.create())).toThrow(Error);
+  expect(() => game.addPlayers(null, PlayerTestFactory.create())).toThrow(Error);
+});
+
 test('Cannot start game (throw exception) when any player is not selected', () => {
   const game = new Game();
   expect(() => game.start()).toThrow(Error);
