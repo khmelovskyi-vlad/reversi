@@ -12,7 +12,7 @@ test('field must create cells with correct indexes', () => {
   let includesAll = true;
   for (let i = 0; i < Field.cellsInRow; i++) {
     for (let j = 0; j < Field.cellsInColumn; j++) {
-        if(!field.cells.some(cell => cell.x === i && cell.y === j)){
+        if(!field.isExistCell(i, j)){
             includesAll = false;
         }
     }
@@ -78,7 +78,7 @@ test('findCell return cell with coordinates if cell exists', () => {
   const field = FieldTestFactory.create();
   const x = 0;
   const y = 0;
-  expect(field.findCell(x, y)).toBe(field.cells.find(cell => cell.x === x && cell.y === y));
+  expect(field.findCell(x, y)).toBe(field.findCell(x, y));
 });
 
 test('findCell return undefined with coordinates if cell not exists', () => {

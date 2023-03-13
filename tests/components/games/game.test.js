@@ -74,7 +74,7 @@ test('Cell with selected coordinates must fill current user after move', () => {
   const x = Field.halfCellsInRow + 1;
   const y = Field.halfCellsInColumn;
   game.move(x, y);
-  const cell = game.field.cells.find(cell => cell.x === x && cell.y === y);
+  const cell = game.field.findCell(x, y);
   expect(cell).not.toBe(null);
   expect(cell.player).toBe(game.player1);
 });
@@ -118,7 +118,7 @@ test('Cells diagonally for current player cell must fill current player after mo
   const game = GameTestFactory.create();
   const x = Field.halfCellsInRow + 1;
   const y = Field.halfCellsInColumn;
-  game.field.cells.find(cell => cell.x === x && cell.y === y).player = game.nextPlayer;
+  game.field.findCell(x, y).player = game.nextPlayer;
   game.move(x + 1, y + 1);
   const cells = game.field.cells.filter(cell => 
     cell.x === x && cell.y === y);

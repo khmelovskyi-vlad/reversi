@@ -135,7 +135,7 @@ class Game {
   }
 
   tryTurnOverStone(x, y){
-    const cell = this.field.cells.find(cell => cell.x === x && cell.y === y);
+    const cell = this.field.findCell(x, y);
     if (cell.player === this.nextPlayer) {
       cell.player = this.currentPlayer;
       return true;
