@@ -17,6 +17,16 @@ test('empty cell can not have player', () => {
   expect(cell.isEmpty).toBe(false);
 });
 
+test('Throw error on fill cell with null player', () => {
+  const cell = new Cell();
+  expect(() => cell.fill(null)).toThrow(Error);
+});
+
+test('Throw error on fill cell with no player', () => {
+  const cell = new Cell();
+  expect(() => cell.fill()).toThrow(Error);
+});
+
 test('empty cell must have some indexes', () => {
   const x = 1;
   const y = 2;

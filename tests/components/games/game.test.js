@@ -80,3 +80,14 @@ test('Change current player without players must throw exception', () => {
   game.player1 = PlayerTestFactory.create();
   expect(() => game.changeCurrentPlayer()).toThrow(Error);
 });
+
+test('Next player must get next player', () => {
+  const game = GameTestFactory.create();
+  expect(game.nextPlayer).toBe(game.player2);
+});
+
+test('Next player without players must throw exception', () => {
+  const game = GameTestFactory.create();
+  game.player1 = PlayerTestFactory.create();
+  expect(() => game.nextPlayer).toThrow(Error);
+});

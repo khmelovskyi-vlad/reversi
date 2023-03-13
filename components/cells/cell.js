@@ -11,6 +11,9 @@ class Cell {
   };
 
   fill(player){
+    if (!player) {
+      throw new Error('Cannot fill null player');
+    }
     if (this.player === player) {
       throw new Error('Cannot fill cell with same player');
     }

@@ -15,8 +15,8 @@ class Game {
       throw new Error('Can not start game if players have the same stone colors');
     }
     
-    this.field = new Field();
     this.currentPlayer = this.selectFirstPlayer();
+    this.field = new Field(this.currentPlayer, this.nextPlayer);
     this.gameWasStarted = true;
   }
 
@@ -45,15 +45,18 @@ class Game {
   }
 
   changeCurrentPlayer(){
+    this.currentPlayer = this.nextPlayer;
+  }
+
+  get nextPlayer(){
     if (this.currentPlayer === this.player1) {
-      this.currentPlayer = this.player2;
+      return this.player2;
     }
     else if (this.currentPlayer === this.player2) {
-      this.currentPlayer = this.player1;
+      return this.player1;
     }
-    else{
-      throw new Error('Cannot change current player because existing players is not the same');
-    }
+    
+    throw new Error('Cannot get next player because existing players is not the same');
   }
 }
 
