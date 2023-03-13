@@ -1,6 +1,11 @@
 const Cell = require("../cells/cell");
 
 class Field {
+    static cellsInRow = 8;
+    static cellsInColumn = 8;
+    static halfCellsInRow = this.cellsInRow / 2;
+    static halfCellsInColumn = this.cellsInColumn / 2;
+
     cells = [];
 
     constructor(currentPlayer, anotherPlayer){
@@ -8,8 +13,11 @@ class Field {
     }
 
     create(currentPlayer, anotherPlayer){
-        for (let i = 0; i < 8; i++) {
-            for (let j = 0; j < 8; j++) {
+        if (!currentPlayer || !anotherPlayer) {
+            throw new Error('Field without players cannot be created');
+        }
+        for (let i = 0; i < Field.cellsInRow; i++) {
+            for (let j = 0; j < Field.cellsInColumn; j++) {
                 this.cells.push(new Cell(i, j));
             }
         }
@@ -17,10 +25,18 @@ class Field {
     }
 
     initCenterSquare(currentPlayer, anotherPlayer){
-        this.cells.find(cell => cell.x === 4 && cell.y === 3).fill(currentPlayer);
-        this.cells.find(cell => cell.x === 3 && cell.y === 4).fill(currentPlayer);
-        this.cells.find(cell => cell.x === 3 && cell.y === 3).fill(anotherPlayer);
-        this.cells.find(cell => cell.x === 4 && cell.y === 4).fill(anotherPlayer);
+        this.cells
+            .find(cell => cell.x === Field.halfCellsInRow && cell.y === Field.halfCellsInColumn - 1)
+            .fill(currentPlayer);
+        this.cells
+            .find(cell => cell.x === Field.halfCellsInRow - 1 && cell.y === Field.halfCellsInColumn)
+            .fill(currentPlayer);
+        this.cells
+            .find(cell => cell.x === Field.halfCellsInRow - 1 && cell.y === Field.halfCellsInColumn - 1)
+            .fill(anotherPlayer);
+        this.cells
+            .find(cell => cell.x === Field.halfCellsInRow && cell.y === Field.halfCellsInColumn)
+            .fill(anotherPlayer);
     }
     
     fillCell(x, y, player){
