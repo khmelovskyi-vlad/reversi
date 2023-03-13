@@ -46,6 +46,14 @@ class Field {
         }
         cell.fill(player);
     }
+
+    isExistCell(x, y){
+        return this.cells.some(cell => cell.x === x && cell.y === y);
+    }
+
+    findCell(x, y){
+        return this.cells.find(cell => cell.x === x && cell.y === y);
+    }
 }
 
 module.exports = Field;

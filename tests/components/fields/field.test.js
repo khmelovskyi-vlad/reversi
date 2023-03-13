@@ -62,3 +62,28 @@ test('field without players cannot be created', () => {
   expect(() => new Field(PlayerTestFactory.create())).toThrow(Error);
   expect(() => new Field(null, PlayerTestFactory.create())).toThrow(Error);
 });
+
+test('isExistCell return true if cell with coordinates exists', () => {
+  const field = FieldTestFactory.create();
+  expect(field.isExistCell(0, 0)).toBe(true);
+});
+
+test('isExistCell return true if cell with coordinates not exists', () => {
+  const field = FieldTestFactory.create();
+  expect(field.isExistCell(Field.cellsInRow + 1, 0)).toBe(false);
+  expect(field.isExistCell(0, Field.cellsInColumn + 1)).toBe(false);
+});
+
+test('findCell return cell with coordinates if cell exists', () => {
+  const field = FieldTestFactory.create();
+  const x = 0;
+  const y = 0;
+  expect(field.findCell(x, y)).toBe(field.cells.find(cell => cell.x === x && cell.y === y));
+});
+
+test('findCell return undefined with coordinates if cell not exists', () => {
+  const field = FieldTestFactory.create();
+  const x = Field.cellsInRow + 1;
+  const y = Field.cellsInColumn + 1;
+  expect(field.findCell(x, y)).toBe(undefined);
+});
