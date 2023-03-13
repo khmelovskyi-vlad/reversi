@@ -1,4 +1,5 @@
 const Cell = require('../../../components/cells/cell');
+const PlayerTestFactory = require('../factories/playerTestFactory');
 
 test('new cell must be empty', () => {
   const cell = new Cell();
@@ -12,7 +13,7 @@ test('new cell must be without player', () => {
 
 test('empty cell can not have player', () => {
   const cell = new Cell();
-  cell.player = "Player";
+  cell.player = PlayerTestFactory.create(true);
   expect(cell.isEmpty).toBe(false);
 });
 

@@ -1,6 +1,5 @@
 const Field = require('../../../components/fields/field');
-const Player = require('../../../components/players/player');
-const StoneColor = require('../../../components/stoneColors/stoneColor');
+const PlayerTestFactory = require('../factories/playerTestFactory');
 
 test('field must create 64 cells', () => {
   const field = new Field();
@@ -32,14 +31,14 @@ test('field must create cells without players', () => {
 
 test('On fill cell if cell with selected coordinates is not exist throw exception', () => {
   const field = new Field();
-  expect(() => field.fillCell(0, 9, new Player('Player', StoneColor.black))).toThrow(Error);
+  expect(() => field.fillCell(0, 9, PlayerTestFactory.create(true))).toThrow(Error);
 });
 
 test('If cell with selected coordinates was filled current player throw exception', () => {
   const field = new Field();
   const x = 0;
   const y = 0;
-  const player = new Player('Player', StoneColor.black);
+  const player = PlayerTestFactory.create(true);
   field.fillCell(x, y, player);
   expect(() => field.fillCell(x, y, player)).toThrow(Error);
 });
