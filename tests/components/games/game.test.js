@@ -1,3 +1,4 @@
+const Field = require("../../../components/fields/field");
 const Game = require("../../../components/games/game");
 const Player = require("../../../components/players/player");
 const StoneColor = require("../../../components/stoneColors/stoneColor");
@@ -62,18 +63,66 @@ test('Cannot move (throw exception) if game was not started', () => {
 
 test('Change current player after move', () => {
   const game = GameTestFactory.create();
-  game.move(0, 0);
+  const x = Field.halfCellsInRow + 1;
+  const y = Field.halfCellsInColumn;
+  game.move(x, y);
   expect(game.currentPlayer).toBe(game.player2);
 });
 
-test('Cell with selected coordinates must fill current user', () => {
+test('Cell with selected coordinates must fill current user after move', () => {
   const game = GameTestFactory.create();
-  const x = 0;
-  const y = 0;
+  const x = Field.halfCellsInRow + 1;
+  const y = Field.halfCellsInColumn;
   game.move(x, y);
   const cell = game.field.cells.find(cell => cell.x === x && cell.y === y);
   expect(cell).not.toBe(null);
   expect(cell.player).toBe(game.player1);
+});
+
+test('Can move only on coordinates where can turn over any stone', () => {
+  const game = GameTestFactory.create();
+  const x = Field.halfCellsInRow + 1;
+  const y = Field.halfCellsInColumn;
+  game.move(x, y);
+  expect(true).toBe(true);
+});
+
+test('Cannot move (throw error) coordinates where can not turn over any stone', () => {
+  const game = GameTestFactory.create();
+  const x = 0;
+  const y = 0;
+  expect(() => game.move(x, y)).toThrow(Error);
+});
+
+test('Cells horizontally for current player cell must fill current player after move', () => {
+  const game = GameTestFactory.create();
+  const x = Field.halfCellsInRow + 1;
+  const y = Field.halfCellsInColumn;
+  game.move(x, y);
+  const cells = game.field.cells.filter(cell => 
+    cell.x === x - 1 && cell.y === y);
+  expect(cells.every(cell => cell.player === game.player1)).toBe(true);
+});
+
+test('Cells vertically for current player cell must fill current player after move', () => {
+  const game = GameTestFactory.create();
+  const x = Field.halfCellsInRow;
+  const y = Field.halfCellsInColumn + 1;
+  game.move(x, y);
+  const cells = game.field.cells.filter(cell => 
+    cell.x === x && cell.y === y - 1);
+  expect(cells.every(cell => cell.player === game.player1)).toBe(true);
+});
+
+test('Cells diagonally for current player cell must fill current player after move', () => {
+  const game = GameTestFactory.create();
+  const x = Field.halfCellsInRow + 1;
+  const y = Field.halfCellsInColumn;
+  game.field.cells.find(cell => cell.x === x && cell.y === y).player = game.nextPlayer;
+  game.move(x + 1, y + 1);
+  const cells = game.field.cells.filter(cell => 
+    cell.x === x && cell.y === y);
+  expect(cells.every(cell => cell.player === game.player1)).toBe(true);
 });
 
 test('Change current player must change player to another', () => {
