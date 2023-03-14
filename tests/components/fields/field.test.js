@@ -87,3 +87,9 @@ test('findCell return undefined with coordinates if cell not exists', () => {
   const y = Field.cellsInColumn + 1;
   expect(field.findCell(x, y)).toBe(undefined);
 });
+
+test('field must create document with correct classes', () => {
+  const field = FieldTestFactory.create();
+  expect(field.document.classList).toContain('row');
+  expect(field.document.classList).toContain('field');
+});

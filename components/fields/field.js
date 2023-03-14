@@ -7,6 +7,7 @@ class Field {
     static halfCellsInColumn = this.cellsInColumn / 2;
 
     cells = [];
+    document = null;
 
     constructor(currentPlayer, anotherPlayer){
         this.create(currentPlayer, anotherPlayer);
@@ -22,6 +23,13 @@ class Field {
             }
         }
         this.initCenterSquare(currentPlayer, anotherPlayer);
+        this.initDocument();
+    }
+
+    initDocument(){
+        this.document = document.createElement('div');
+        this.document.classList.add('row');
+        this.document.classList.add('field');
     }
 
     initCenterSquare(currentPlayer, anotherPlayer){
