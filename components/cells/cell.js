@@ -4,6 +4,9 @@ class Cell {
   constructor(x, y){
     this.x = x;
     this.y = y;
+    this.document = document.createElement("div");
+    this.document.setAttribute('x', this.x);
+    this.document.setAttribute('y', this.y);
   }
 
   get isEmpty(){

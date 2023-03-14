@@ -39,3 +39,9 @@ test('empty cell must have some indexes', () => {
   expect(cell2.x).toBe(x2);
   expect(cell2.y).toBe(y2);
 });
+
+test('new cell must create html document with correct coordinates', () => {
+  const cell = new Cell(0, 0);
+  expect(Number(cell.document.getAttribute('x'))).toBe(cell.x);
+  expect(Number(cell.document.getAttribute('y'))).toBe(cell.y);
+});
