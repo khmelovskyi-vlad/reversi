@@ -1,4 +1,7 @@
 class Cell {
+  static classes = ['col', 'cell'];
+  static xAttributeName = 'x';
+  static yAttributeName = 'y';
   player = null;
   document = null;
 
@@ -9,11 +12,13 @@ class Cell {
   }
 
   initDocument(){
-    this.document = document.createElement("div");
-    this.document.setAttribute('x', this.x);
-    this.document.setAttribute('y', this.y);
-    this.document.classList.add('col');
-    this.document.classList.add('cell');
+    this.document = document.createElement('div');
+    this.document.setAttribute(Cell.xAttributeName, this.x);
+    this.document.setAttribute(Cell.yAttributeName, this.y);
+    Cell.classes.forEach(oneClass => {
+      this.document.classList.add(oneClass);
+      this.document.classList.add(oneClass);
+    });
   }
 
   get isEmpty(){

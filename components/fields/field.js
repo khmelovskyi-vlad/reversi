@@ -1,6 +1,8 @@
 const Cell = require("../cells/cell");
 
 class Field {
+    static classes = ['field'];
+    static childClasses = ['row', 'field-child'];
     static cellsInRow = 8;
     static cellsInColumn = 8;
     static halfCellsInRow = this.cellsInRow / 2;
@@ -19,7 +21,7 @@ class Field {
         }
         this.initDocument();
         for (let i = 0; i < Field.cellsInRow; i++) {
-            const childDocument = this.initChildDocument(i);
+            const childDocument = this.initChildDocument();
             for (let j = 0; j < Field.cellsInColumn; j++) {
                 const cell = new Cell(i, j);
                 this.addCell(cell, childDocument);
@@ -35,14 +37,16 @@ class Field {
 
     initDocument(){
         this.document = document.createElement('div');
-        this.document.classList.add('field');
+        Field.classes.forEach(oneClass => {
+          this.document.classList.add(oneClass);
+        });
     }
 
-    initChildDocument(x){
+    initChildDocument(){
         const fieldChild = document.createElement('div');
-        fieldChild.classList.add('row');
-        fieldChild.classList.add('field-child');
-        fieldChild.setAttribute('x', x);
+        Field.childClasses.forEach(oneClass => {
+            fieldChild.classList.add(oneClass);
+        });
         this.document.appendChild(fieldChild);
         return fieldChild;
     }

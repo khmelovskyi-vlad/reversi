@@ -90,7 +90,9 @@ test('findCell return undefined with coordinates if cell not exists', () => {
 
 test('field must create document with correct classes', () => {
   const field = FieldTestFactory.create();
-  expect(field.document.classList).toContain('field');
+  Field.classes.forEach(oneClass => {
+    expect(field.document.classList).toContain(oneClass);
+  });
 });
 
 test('field must create document with cells in row count of children elements', () => {
@@ -101,8 +103,9 @@ test('field must create document with cells in row count of children elements', 
 test('field must create document with children elements with correct classes', () => {
   const field = FieldTestFactory.create();
   for (const fieldChildDocument of field.document.children) {
-    expect(fieldChildDocument.classList).toContain('row');
-    expect(fieldChildDocument.classList).toContain('field-child');
+    Field.childClasses.forEach(oneClass => {
+      expect(fieldChildDocument.classList).toContain(oneClass);
+    });
   }
 });
 
