@@ -45,3 +45,9 @@ test('new cell must create html document with correct coordinates', () => {
   expect(Number(cell.document.getAttribute('x'))).toBe(cell.x);
   expect(Number(cell.document.getAttribute('y'))).toBe(cell.y);
 });
+
+test('new cell must create html document with correct classes', () => {
+  const cell = new Cell(0, 0);
+  expect(cell.document.classList).toContain('col');
+  expect(cell.document.classList).toContain('cell');
+});
