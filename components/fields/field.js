@@ -17,19 +17,34 @@ class Field {
         if (!currentPlayer || !anotherPlayer) {
             throw new Error('Field without players cannot be created');
         }
+        this.initDocument();
         for (let i = 0; i < Field.cellsInRow; i++) {
+            const childDocument = this.initChildDocument(i);
             for (let j = 0; j < Field.cellsInColumn; j++) {
-                this.cells.push(new Cell(i, j));
+                const cell = new Cell(i, j);
+                this.addCell(cell, childDocument);
             }
         }
         this.initCenterSquare(currentPlayer, anotherPlayer);
-        this.initDocument();
+    }
+
+    addCell(cell, childDocument){
+        this.cells.push(cell);
+        childDocument.appendChild(cell.document);
     }
 
     initDocument(){
         this.document = document.createElement('div');
-        this.document.classList.add('row');
         this.document.classList.add('field');
+    }
+
+    initChildDocument(x){
+        const fieldChild = document.createElement('div');
+        fieldChild.classList.add('row');
+        fieldChild.classList.add('field-child');
+        fieldChild.setAttribute('x', x);
+        this.document.appendChild(fieldChild);
+        return fieldChild;
     }
 
     initCenterSquare(currentPlayer, anotherPlayer){
