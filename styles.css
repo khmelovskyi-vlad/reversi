@@ -1,0 +1,10 @@
+.field{
+  width: 30vw;
+  height: 30vw;
+}
+.field-shild{
+  border-style: solid;
+}
+.cell{
+  aspect-ratio: 1;
+}
