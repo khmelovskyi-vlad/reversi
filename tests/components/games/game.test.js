@@ -16,8 +16,8 @@ test('Add two players to game', () => {
   const game = new Game();
   expect(game.player1).toBe(null);
   expect(game.player2).toBe(null);
-  const player1 = new Player('Player 1', StoneColor.black);
-  const player2 = new Player('Player 2', StoneColor.white);
+  const player1 = new Player('Player 1', StoneColor.black, true);
+  const player2 = new Player('Player 2', StoneColor.white, false);
   game.addPlayers(player1, player2);
   expect(game.player1).toBe(player1);
   expect(game.player2).toBe(player2);
@@ -50,7 +50,7 @@ test('Select current player on start game', () => {
 
 test('Cannot start game (throw exception) when any players not have first move', () => {
   const game = new Game();
-  const player1 = new Player('Player 1', new StoneColor('red'));
+  const player1 = new Player('Player 1', new StoneColor('red'), false);
   const player2 = PlayerTestFactory.create(false);
   game.addPlayers(player1, player2);
   expect(() => game.start()).toThrow(Error);

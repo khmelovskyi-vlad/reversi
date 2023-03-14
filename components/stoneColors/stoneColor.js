@@ -7,17 +7,6 @@ class StoneColor {
   constructor(value){
     this.value = value;
   }
-
-  get isPlayerFirstMove(){
-    switch (this.value) {
-      case StoneColor.blackValue:
-        return true;
-      case StoneColor.whiteValue:
-        return false;
-      default:
-        throw new Error('Not implemented color');
-    }
-  }
 }
 
 module.exports = StoneColor;

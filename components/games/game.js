@@ -29,10 +29,10 @@ class Game {
   }
 
   selectFirstPlayer(){
-    if (this.player1.stoneColor.isPlayerFirstMove) {
+    if (this.player1.isPlayerFirstMove) {
       return this.player1;
     }
-    else if(this.player2.stoneColor.isPlayerFirstMove){
+    else if(this.player2.isPlayerFirstMove){
       return this.player2;
     }
     
