@@ -43,6 +43,22 @@ test('Cannot start game (throw exception) when players have same stone color', (
   expect(() => game.start()).toThrow(Error);
 });
 
+test('Cannot start game (throw exception) when all players have first move', () => {
+  const game = new Game();
+  const player1 = new Player('Player 1', StoneColor.black, true);
+  const player2 = new Player('Player 1', StoneColor.white, true);
+  game.addPlayers(player1, player2);
+  expect(() => game.start()).toThrow(Error);
+});
+
+test('Cannot start game (throw exception) when all players not have first move', () => {
+  const game = new Game();
+  const player1 = new Player('Player 1', StoneColor.black, false);
+  const player2 = new Player('Player 1', StoneColor.white, false);
+  game.addPlayers(player1, player2);
+  expect(() => game.start()).toThrow(Error);
+});
+
 test('Select current player on start game', () => {
   const game = GameTestFactory.create();
   expect(game.currentPlayer).toBe(game.player1);

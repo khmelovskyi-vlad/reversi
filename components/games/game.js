@@ -8,16 +8,25 @@ class Game {
   gameWasStarted = false;
 
   start(){
+    this.startGameValidation();
+    this.currentPlayer = this.selectFirstPlayer();
+    this.field = new Field(this.currentPlayer, this.nextPlayer);
+    this.gameWasStarted = true;
+  }
+
+  startGameValidation(){
     if (!this.player1 || !this.player2) {
       throw new Error('Can not start game without players initialization');
     }
     if (this.player1.stoneColor === this.player2.stoneColor) {
       throw new Error('Can not start game if players have the same stone colors');
     }
-    
-    this.currentPlayer = this.selectFirstPlayer();
-    this.field = new Field(this.currentPlayer, this.nextPlayer);
-    this.gameWasStarted = true;
+    if (this.player1.isPlayerFirstMove === true && this.player2.isPlayerFirstMove === true) {
+      throw new Error('Can not start game if all players have first move');
+    }
+    if (this.player1.isPlayerFirstMove === false && this.player2.isPlayerFirstMove === false) {
+      throw new Error('Can not start game if all players not have first move');
+    }
   }
 
   addPlayers(player1, player2){
