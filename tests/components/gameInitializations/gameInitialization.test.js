@@ -1,4 +1,9 @@
 import { GameInitialization } from "../../../components/gameInitializations/gameInitialization.js";
+import { StringExtentions } from "../../../extentions/stringExtentions.js";
+
+beforeEach(() => {
+  StringExtentions.run();
+});
 
 test('game initialization must create document with correct classes', () => {
   const gameInitialization = new GameInitialization();
