@@ -1,5 +1,5 @@
 export class PlayerStoneInitialization {
-  static classes = ['col-6'];
+  static classes = ['col'];
   static labelClasses = ['form-label'];
   static selectClasses = ['form-control'];
   static selectIdFirstPart = 'playerStoneColor';
