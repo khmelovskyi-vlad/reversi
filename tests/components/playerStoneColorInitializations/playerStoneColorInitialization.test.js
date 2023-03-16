@@ -1,53 +1,53 @@
-import { PlayerStoneInitialization } from "../../../components/playerStoneColorInitializations/playerStoneColorInitialization.js";
+import { PlayerStoneColorInitialization } from "../../../components/playerStoneColorInitializations/playerStoneColorInitialization.js";
 
-test('player name initialization must create document with correct classes', () => {
-  const playerStoneInitialization = new PlayerStoneInitialization(1);
-  PlayerStoneInitialization.classes.forEach(oneClass => {
-    expect(playerStoneInitialization.document.classList).toContain(oneClass);
+test('player stone color initialization must create document with correct classes', () => {
+  const playerStoneColorInitialization = new PlayerStoneColorInitialization(1);
+  PlayerStoneColorInitialization.classes.forEach(oneClass => {
+    expect(playerStoneColorInitialization.document.classList).toContain(oneClass);
   });
 });
 
-test('player name initialization must create label document with correct classes', () => {
-  const playerStoneInitialization = new PlayerStoneInitialization(1);
-  PlayerStoneInitialization.labelClasses.forEach(oneClass => {
-    expect(playerStoneInitialization.labelDocument.classList).toContain(oneClass);
+test('player stone color initialization must create label document with correct classes', () => {
+  const playerStoneColorInitialization = new PlayerStoneColorInitialization(1);
+  PlayerStoneColorInitialization.labelClasses.forEach(oneClass => {
+    expect(playerStoneColorInitialization.labelDocument.classList).toContain(oneClass);
   });
 });
 
-test('player name initialization must create label document with correct for', () => {
+test('player stone color initialization must create label document with correct for', () => {
   const playerNumber = 1;
-  const playerStoneInitialization = new PlayerStoneInitialization(playerNumber);
-  expect(playerStoneInitialization.labelDocument
-    .getAttribute(PlayerStoneInitialization.labelForAttributeName))
-    .toBe(PlayerStoneInitialization.selectIdFirstPart + playerNumber);
+  const playerStoneColorInitialization = new PlayerStoneColorInitialization(playerNumber);
+  expect(playerStoneColorInitialization.labelDocument
+    .getAttribute(PlayerStoneColorInitialization.labelForAttributeName))
+    .toBe(PlayerStoneColorInitialization.selectIdFirstPart + playerNumber);
 });
 
-test('player name initialization must create label document with correct text', () => {
+test('player stone color initialization must create label document with correct text', () => {
   const playerNumber = 1;
-  const playerStoneInitialization = new PlayerStoneInitialization(playerNumber);
-  expect(playerStoneInitialization.labelDocument.textContent)
-    .toBe(PlayerStoneInitialization.labelTextFormat);
+  const playerStoneColorInitialization = new PlayerStoneColorInitialization(playerNumber);
+  expect(playerStoneColorInitialization.labelDocument.textContent)
+    .toBe(PlayerStoneColorInitialization.labelTextFormat);
 });
 
-test('player name initialization must create select document with correct classes', () => {
-  const playerStoneInitialization = new PlayerStoneInitialization(1);
-  PlayerStoneInitialization.selectClasses.forEach(oneClass => {
-    expect(playerStoneInitialization.selectDocument.classList).toContain(oneClass);
+test('player stone color initialization must create select document with correct classes', () => {
+  const playerStoneColorInitialization = new PlayerStoneColorInitialization(1);
+  PlayerStoneColorInitialization.selectClasses.forEach(oneClass => {
+    expect(playerStoneColorInitialization.selectDocument.classList).toContain(oneClass);
   });
 });
 
-test('player name initialization must create select document with correct id', () => {
+test('player stone color initialization must create select document with correct id', () => {
   const playerNumber = 1;
-  const playerStoneInitialization = new PlayerStoneInitialization(playerNumber);
-  expect(playerStoneInitialization.selectDocument
-    .getAttribute(PlayerStoneInitialization.selectIdAttributeName))
-    .toBe(PlayerStoneInitialization.selectIdFirstPart + playerNumber);
+  const playerStoneColorInitialization = new PlayerStoneColorInitialization(playerNumber);
+  expect(playerStoneColorInitialization.selectDocument
+    .getAttribute(PlayerStoneColorInitialization.selectIdAttributeName))
+    .toBe(PlayerStoneColorInitialization.selectIdFirstPart + playerNumber);
 });
 
-test('player name initialization must create select document with required attribute', () => {
+test('player stone color initialization must create select document with required attribute', () => {
   const playerNumber = 1;
-  const playerStoneInitialization = new PlayerStoneInitialization(playerNumber);
-  expect(playerStoneInitialization.selectDocument
-    .getAttribute(PlayerStoneInitialization.selectRequiredAttributeName))
-    .toBe(PlayerStoneInitialization.selectRequiredAttribute);
+  const playerStoneColorInitialization = new PlayerStoneColorInitialization(playerNumber);
+  expect(playerStoneColorInitialization.selectDocument
+    .getAttribute(PlayerStoneColorInitialization.selectRequiredAttributeName))
+    .toBe(PlayerStoneColorInitialization.selectRequiredAttribute);
 });

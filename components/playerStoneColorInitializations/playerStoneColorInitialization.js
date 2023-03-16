@@ -1,4 +1,4 @@
-export class PlayerStoneInitialization {
+export class PlayerStoneColorInitialization {
   static classes = ['col'];
   static labelClasses = ['form-label'];
   static selectClasses = ['form-control'];
@@ -21,37 +21,37 @@ export class PlayerStoneInitialization {
 
   initDocument(){
     this.document = document.createElement('div');
-    PlayerStoneInitialization.classes.forEach(oneClass => {
+    PlayerStoneColorInitialization.classes.forEach(oneClass => {
       this.document.classList.add(oneClass);
     });
   }
 
   initLabel(){
     this.labelDocument = document.createElement('label');
-    PlayerStoneInitialization.labelClasses.forEach(oneClass => {
+    PlayerStoneColorInitialization.labelClasses.forEach(oneClass => {
       this.labelDocument.classList.add(oneClass);
     });
     this.labelDocument.setAttribute(
-      PlayerStoneInitialization.labelForAttributeName,
-      PlayerStoneInitialization.selectIdFirstPart + this.playerNumber);
-    this.labelDocument.textContent = PlayerStoneInitialization.labelTextFormat;
+      PlayerStoneColorInitialization.labelForAttributeName,
+      PlayerStoneColorInitialization.selectIdFirstPart + this.playerNumber);
+    this.labelDocument.textContent = PlayerStoneColorInitialization.labelTextFormat;
     this.document.appendChild(this.labelDocument);
   }
 
   initSelect(){
     this.selectDocument = document.createElement('select');
-    PlayerStoneInitialization.selectClasses.forEach(oneClass => {
+    PlayerStoneColorInitialization.selectClasses.forEach(oneClass => {
       this.selectDocument.classList.add(oneClass);
     });
     this.selectDocument.setAttribute(
-      PlayerStoneInitialization.selectIdAttributeName,
-      PlayerStoneInitialization.selectIdFirstPart + this.playerNumber);
+      PlayerStoneColorInitialization.selectIdAttributeName,
+      PlayerStoneColorInitialization.selectIdFirstPart + this.playerNumber);
     this.selectDocument.setAttribute(
-      PlayerStoneInitialization.selectRequiredAttributeName,
-      PlayerStoneInitialization.selectRequiredAttribute);
+      PlayerStoneColorInitialization.selectRequiredAttributeName,
+      PlayerStoneColorInitialization.selectRequiredAttribute);
     this.selectDocument.setAttribute(
-      PlayerStoneInitialization.selectRequiredAttributeName,
-      PlayerStoneInitialization.selectRequiredAttribute);
+      PlayerStoneColorInitialization.selectRequiredAttributeName,
+      PlayerStoneColorInitialization.selectRequiredAttribute);
     this.document.appendChild(this.selectDocument);
   }
 }
