@@ -1,4 +1,9 @@
 const PlayerNameInitialization = require("../../../components/playerNameInitializations/playerNameInitialization");
+const StringExtentions = require("../../../extentions/stringExtentions");
+
+beforeEach(() => {
+  StringExtentions.run();
+});
 
 test('player name initialization must create document with correct classes', () => {
   const playerNameInitialization = new PlayerNameInitialization(1);
@@ -22,6 +27,13 @@ test('player name initialization must create label document with correct for', (
     .toBe(PlayerNameInitialization.inputIdFirstPart + playerNumber);
 });
 
+test('player name initialization must create label document with correct text', () => {
+  const playerNumber = 1;
+  const playerNameInitialization = new PlayerNameInitialization(playerNumber);
+  expect(playerNameInitialization.labelDocument.textContent)
+    .toBe(PlayerNameInitialization.labelTextFormat.format(playerNumber));
+});
+
 test('player name initialization must create input document with correct classes', () => {
   const playerNameInitialization = new PlayerNameInitialization(1);
   PlayerNameInitialization.inputClasses.forEach(oneClass => {
@@ -43,4 +55,12 @@ test('player name initialization must create input document with correct type', 
   expect(playerNameInitialization.inputDocument
     .getAttribute(PlayerNameInitialization.inputTypeAttributeName))
     .toBe(PlayerNameInitialization.inputTypeAttribute);
+});
+
+test('player name initialization must create input document with required attribute', () => {
+  const playerNumber = 1;
+  const playerNameInitialization = new PlayerNameInitialization(playerNumber);
+  expect(playerNameInitialization.inputDocument
+    .getAttribute(PlayerNameInitialization.inputRequiredAttributeName))
+    .toBe(PlayerNameInitialization.inputRequiredAttribute);
 });

@@ -7,6 +7,9 @@ class PlayerNameInitialization {
   static inputIdAttributeName = 'id';
   static inputTypeAttributeName = 'type';
   static inputTypeAttribute = 'text';
+  static labelTextFormat = 'Player {0} name';
+  static inputRequiredAttributeName = 'required';
+  static inputRequiredAttribute = '';
   document = null;
   labelDocument = null;
   inputDocument = null;
@@ -33,6 +36,7 @@ class PlayerNameInitialization {
     this.labelDocument.setAttribute(
       PlayerNameInitialization.labelForAttributeName,
       PlayerNameInitialization.inputIdFirstPart + this.playerNumber);
+    this.labelDocument.textContent = PlayerNameInitialization.labelTextFormat.format(this.playerNumber);
     this.document.appendChild(this.labelDocument);
   }
 
@@ -47,6 +51,9 @@ class PlayerNameInitialization {
       this.inputDocument.setAttribute(
         PlayerNameInitialization.inputTypeAttributeName,
         PlayerNameInitialization.inputTypeAttribute);
+        this.inputDocument.setAttribute(
+          PlayerNameInitialization.inputRequiredAttributeName,
+          PlayerNameInitialization.inputRequiredAttribute);
     this.document.appendChild(this.inputDocument);
   }
 }
