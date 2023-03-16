@@ -6,3 +6,10 @@ test('submit button must create document with correct classes', () => {
     expect(submitButton.document.classList).toContain(oneClass);
   });
 });
+
+test('submit button must create document with correct text', () => {
+  const text = 'some text';
+  const submitButton = new SubmitButton(text);
+  expect(submitButton.document.textContent)
+    .toBe(text);
+});
