@@ -26,3 +26,10 @@ test('game initialization must create submit button', () => {
   const gameInitialization = new GameInitialization();
   expect(gameInitialization.submitButton).not.toBe(null);
 });
+
+test('game initialization document must contain 2 players, sumbit button initializations documents', () => {
+  const gameInitialization = new GameInitialization();
+  expect(gameInitialization.document.children).toContain(gameInitialization.player1Initialization.document);
+  expect(gameInitialization.document.children).toContain(gameInitialization.player2Initialization.document);
+  expect(gameInitialization.document.children).toContain(gameInitialization.submitButton.document);
+});

@@ -7,9 +7,12 @@ export class GameInitialization {
   
   constructor(){
     this.initDocument();
-    this.player1Initialization = new PlayerInitialization();
-    this.player2Initialization = new PlayerInitialization();
+    this.player1Initialization = new PlayerInitialization(1);
+    this.document.appendChild(this.player1Initialization.document);
+    this.player2Initialization = new PlayerInitialization(2);
+    this.document.appendChild(this.player2Initialization.document);
     this.submitButton = new SubmitButton();
+    this.document.appendChild(this.submitButton.document);
   }
 
   initDocument(){
