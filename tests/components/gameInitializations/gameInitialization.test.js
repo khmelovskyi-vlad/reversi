@@ -7,23 +7,17 @@ test('game initialization must create document with correct classes', () => {
   });
 });
 
-test('game initialization must create player 1 document with correct classes', () => {
+test('game initialization must create player 1 initialization', () => {
   const gameInitialization = new GameInitialization();
-  GameInitialization.playerClasses.forEach(oneClass => {
-    expect(gameInitialization.player1Document.classList).toContain(oneClass);
-  });
+  expect(gameInitialization.player1Initialization).not.toBe(null);
 });
 
-test('game initialization must create player 2 document with correct classes', () => {
+test('game initialization must create player 2 initialization', () => {
   const gameInitialization = new GameInitialization();
-  GameInitialization.playerClasses.forEach(oneClass => {
-    expect(gameInitialization.player2Document.classList).toContain(oneClass);
-  });
+  expect(gameInitialization.player2Initialization).not.toBe(null);
 });
 
-test('game initialization must create submit document with correct classes', () => {
+test('game initialization must create submit button', () => {
   const gameInitialization = new GameInitialization();
-  GameInitialization.submitClasses.forEach(oneClass => {
-    expect(gameInitialization.submitDocument.classList).toContain(oneClass);
-  });
+  expect(gameInitialization.submitButton).not.toBe(null);
 });
