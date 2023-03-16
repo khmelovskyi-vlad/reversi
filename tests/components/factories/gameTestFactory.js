@@ -1,7 +1,7 @@
-const GameBuilder = require("../../../components/games/gameBuilder");
-const PlayerTestFactory = require("./playerTestFactory");
+import { GameBuilder } from "../../../components/games/gameBuilder.js";
+import { PlayerTestFactory } from "./playerTestFactory.js";
 
-class GameTestFactory{
+export class GameTestFactory{
   static create(){
     return new GameBuilder()
       .withPlayers(
@@ -19,5 +19,3 @@ class GameTestFactory{
       .build();
   }
 }
-
-module.exports = GameTestFactory;

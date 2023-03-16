@@ -1,4 +1,4 @@
-class StoneColor {
+export class StoneColor {
   static blackValue = 'black';
   static whiteValue = 'white';
   static black = new StoneColor(this.blackValue);
@@ -8,5 +8,3 @@ class StoneColor {
     this.value = value;
   }
 }
-
-module.exports = StoneColor;

@@ -1,9 +1,9 @@
-const Field = require("../../../components/fields/field");
-const Game = require("../../../components/games/game");
-const Player = require("../../../components/players/player");
-const StoneColor = require("../../../components/stoneColors/stoneColor");
-const GameTestFactory = require("../factories/gameTestFactory");
-const PlayerTestFactory = require("../factories/playerTestFactory");
+import { Field } from "../../../components/fields/field.js";
+import { Game } from "../../../components/games/game.js";
+import { Player } from "../../../components/players/player.js";
+import { StoneColor } from "../../../components/stoneColors/stoneColor.js";
+import { GameTestFactory } from "../factories/gameTestFactory.js";
+import { PlayerTestFactory } from "../factories/playerTestFactory.js";
 
 test('Create field on start game', () => {
   const game = GameTestFactory.createWithoutStart();

@@ -1,4 +1,4 @@
-class SubmitButton {
+export class SubmitButton {
   static classes = ['btn', 'btn-primary'];
   document = null;
   
@@ -13,5 +13,3 @@ class SubmitButton {
     });
   }
 }
-
-module.exports = SubmitButton;

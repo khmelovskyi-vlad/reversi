@@ -1,5 +1,5 @@
-const Cell = require('../../../components/cells/cell');
-const PlayerTestFactory = require('../factories/playerTestFactory');
+import { Cell } from "../../../components/cells/cell.js";
+import { PlayerTestFactory } from "../factories/playerTestFactory.js";
 
 test('new cell must be empty', () => {
   const cell = new Cell();

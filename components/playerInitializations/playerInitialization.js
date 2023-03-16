@@ -1,4 +1,4 @@
-class PlayerInitialization {
+export class PlayerInitialization {
   static classes = ['row', 'm-3'];
   document = null;
 
@@ -13,5 +13,3 @@ class PlayerInitialization {
     });
   }
 }
-
-module.exports = PlayerInitialization;

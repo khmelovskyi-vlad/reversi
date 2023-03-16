@@ -1,4 +1,4 @@
-const SubmitButton = require("../../../components/submitButtons/submitButton");
+import { SubmitButton } from "../../../components/submitButtons/submitButton.js";
 
 test('submit button must create document with correct classes', () => {
   const submitButton = new SubmitButton();

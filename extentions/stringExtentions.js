@@ -1,4 +1,4 @@
-class StringExtentions{
+export class StringExtentions{
   static run(){
     this.addFormatMethod();
   }
@@ -14,5 +14,3 @@ class StringExtentions{
     }
   }
 }
-
-module.exports = StringExtentions;

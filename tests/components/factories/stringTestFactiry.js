@@ -1,4 +1,4 @@
-class StringTestFactory{
+export class StringTestFactory{
   static createRandom() {
     let length = 20;
     let result = '';
@@ -12,5 +12,3 @@ class StringTestFactory{
     return result;
   }
 }
-
-module.exports = StringTestFactory;

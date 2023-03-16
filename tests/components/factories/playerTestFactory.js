@@ -1,8 +1,8 @@
-const Player = require("../../../components/players/player");
-const StoneColor = require("../../../components/stoneColors/stoneColor");
-const StringTestFactory = require("./stringTestFactiry");
+import { Player } from "../../../components/players/player.js";
+import { StoneColor } from "../../../components/stoneColors/stoneColor.js";
+import { StringTestFactory } from "./stringTestFactiry.js";
 
-class PlayerTestFactory{
+export class PlayerTestFactory{
   static create(isPlayerFirstMove = false, name = null){
     return new Player(PlayerTestFactory.createName(name), PlayerTestFactory.createColor(isPlayerFirstMove), isPlayerFirstMove);
   }
@@ -23,5 +23,3 @@ class PlayerTestFactory{
     return StoneColor.white;
   }
 }
-
-module.exports = PlayerTestFactory;

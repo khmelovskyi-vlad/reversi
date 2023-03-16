@@ -1,6 +1,6 @@
-const Field = require('../../../components/fields/field');
-const FieldTestFactory = require('../factories/fieldTestFactory');
-const PlayerTestFactory = require('../factories/playerTestFactory');
+import { Field } from "../../../components/fields/field.js";
+import { FieldTestFactory } from "../factories/fieldTestFactory.js";
+import { PlayerTestFactory } from "../factories/playerTestFactory.js";
 
 test('field must create correct count of cells', () => {
   const field = FieldTestFactory.create();

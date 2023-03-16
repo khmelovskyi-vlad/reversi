@@ -1,6 +1,6 @@
-const Game = require("./game");
+import { Game } from "./game.js";
 
-class GameBuilder {
+export class GameBuilder {
   startGame = false;
   player1 = null;
   player2 = null;
@@ -25,5 +25,3 @@ class GameBuilder {
     return game;
   }
 }
-
-module.exports = GameBuilder;

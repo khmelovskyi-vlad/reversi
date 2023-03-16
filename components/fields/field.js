@@ -1,6 +1,6 @@
-const Cell = require("../cells/cell");
+import { Cell } from "../cells/cell.js";
 
-class Field {
+export class Field {
     static classes = ['field'];
     static childClasses = ['row', 'field-child'];
     static cellsInRow = 8;
@@ -82,5 +82,3 @@ class Field {
         return this.cells.find(cell => cell.x === x && cell.y === y);
     }
 }
-
-module.exports = Field;

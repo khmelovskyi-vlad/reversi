@@ -1,4 +1,4 @@
-const PlayerInitialization = require("../../../components/playerInitializations/playerInitialization");
+import { PlayerInitialization } from "../../../components/playerInitializations/playerInitialization.js";
 
 test('player initialization must create document with correct classes', () => {
   const playerInitialization = new PlayerInitialization();

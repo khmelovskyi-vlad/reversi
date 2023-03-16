@@ -1,6 +1,6 @@
-const GameBuilder = require("../../../components/games/gameBuilder");
-const Player = require("../../../components/players/player");
-const StoneColor = require("../../../components/stoneColors/stoneColor");
+import { GameBuilder } from "../../../components/games/gameBuilder.js";
+import { Player } from "../../../components/players/player.js";
+import { StoneColor } from "../../../components/stoneColors/stoneColor.js";
 
 
 test('Game builder with players and start game must build correct game', () => {

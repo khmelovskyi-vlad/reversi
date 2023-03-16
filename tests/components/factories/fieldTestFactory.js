@@ -1,12 +1,10 @@
-const Field = require("../../../components/fields/field");
-const PlayerTestFactory = require("./playerTestFactory");
+import { Field } from "../../../components/fields/field.js";
+import { PlayerTestFactory } from "./playerTestFactory.js";
 
-class FieldTestFactory{
+export class FieldTestFactory{
   static create(){
     return new Field(
         PlayerTestFactory.create(true),
         PlayerTestFactory.create(false));
   }
 }
-
-module.exports = FieldTestFactory;

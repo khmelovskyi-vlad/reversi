@@ -1,6 +1,6 @@
-const Field = require("../fields/field");
+import { Field } from "../fields/field.js";
 
-class Game {
+export class Game {
   field = null;
   currentPlayer = null;
   player1 = null;
@@ -167,5 +167,3 @@ class Game {
     throw new Error('Cannot get next player because existing players is not the same');
   }
 }
-
-module.exports = Game;

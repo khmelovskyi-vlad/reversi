@@ -1,7 +1,7 @@
-const PlayerInitialization = require("../playerInitializations/playerInitialization");
-const SubmitButton = require("../submitButtons/submitButton");
+import { PlayerInitialization } from "../playerInitializations/playerInitialization.js";
+import { SubmitButton } from "../submitButtons/submitButton.js";
 
-class GameInitialization {
+export class GameInitialization {
   static classes = ['game-initialization', 'd-flex', 'flex-column'];
   document = null;
   
@@ -19,5 +19,3 @@ class GameInitialization {
     });
   }
 }
-
-module.exports = GameInitialization;

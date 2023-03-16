@@ -1,4 +1,4 @@
-class PlayerNameInitialization {
+export class PlayerNameInitialization {
   static classes = ['col-6'];
   static labelClasses = ['form-label'];
   static inputClasses = ['form-control'];
@@ -57,5 +57,3 @@ class PlayerNameInitialization {
     this.document.appendChild(this.inputDocument);
   }
 }
-
-module.exports = PlayerNameInitialization;

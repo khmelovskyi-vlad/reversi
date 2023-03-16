@@ -1,5 +1,5 @@
-const Player = require("../../../components/players/player");
-const StoneColor = require("../../../components/stoneColors/stoneColor");
+import { Player } from "../../../components/players/player.js";
+import { StoneColor } from "../../../components/stoneColors/stoneColor.js";
 
 test('Player must have name and stone color on creating', () => {
   const name = 'Name';

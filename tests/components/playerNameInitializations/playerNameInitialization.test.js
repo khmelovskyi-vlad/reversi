@@ -1,5 +1,5 @@
-const PlayerNameInitialization = require("../../../components/playerNameInitializations/playerNameInitialization");
-const StringExtentions = require("../../../extentions/stringExtentions");
+import { PlayerNameInitialization } from "../../../components/playerNameInitializations/playerNameInitialization.js";
+import { StringExtentions } from "../../../extentions/stringExtentions.js";
 
 beforeEach(() => {
   StringExtentions.run();

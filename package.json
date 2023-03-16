@@ -1,9 +1,11 @@
 {
+  "type": "module",
   "scripts": {
     "test": "jest"
   },
   "jest":{
-    "testEnvironment": "jsdom"
+    "testEnvironment": "jsdom",
+    "transform": {}
   },
   "devDependencies": {
     "jest": "^29.5.0",

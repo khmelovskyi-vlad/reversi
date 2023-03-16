@@ -1,4 +1,4 @@
-class Cell {
+export class Cell {
   static classes = ['col', 'cell'];
   static xAttributeName = 'x';
   static yAttributeName = 'y';
@@ -36,5 +36,3 @@ class Cell {
     this.player = player;
   }
 }
-
-module.exports = Cell;
