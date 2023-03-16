@@ -1,3 +1,5 @@
+import { StoneColor } from "../stoneColors/stoneColor";
+
 export class PlayerStoneColorInitialization {
   static classes = ['col'];
   static labelClasses = ['form-label'];
@@ -8,6 +10,7 @@ export class PlayerStoneColorInitialization {
   static labelTextFormat = 'Stone color';
   static selectRequiredAttributeName = 'required';
   static selectRequiredAttribute = '';
+  static optionSelectedAttributeName = 'selected';
   document = null;
   labelDocument = null;
   selectDocument = null;
@@ -17,6 +20,7 @@ export class PlayerStoneColorInitialization {
     this.initDocument();
     this.initLabel();
     this.initSelect();
+    this.initOptions();
   }
 
   initDocument(){
@@ -53,5 +57,20 @@ export class PlayerStoneColorInitialization {
       PlayerStoneColorInitialization.selectRequiredAttributeName,
       PlayerStoneColorInitialization.selectRequiredAttribute);
     this.document.appendChild(this.selectDocument);
+  }
+
+  initOptions(){
+    const colors = StoneColor.availableColors();
+    colors.forEach(color => {
+      const option = document.createElement('option');
+      if (this.playerNumber === 1 && color === StoneColor.black) {
+        option.setAttribute(PlayerStoneColorInitialization.optionSelectedAttributeName, '');
+      }
+      else if (this.playerNumber !== 1 && color === StoneColor.white) {
+        option.setAttribute(PlayerStoneColorInitialization.optionSelectedAttributeName, '');
+      }
+      option.textContent = color.value;
+      this.selectDocument.appendChild(option);
+    });
   }
 }
