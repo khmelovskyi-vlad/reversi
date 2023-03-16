@@ -48,12 +48,12 @@ export class PlayerNameInitialization {
     this.inputDocument.setAttribute(
       PlayerNameInitialization.inputIdAttributeName,
       PlayerNameInitialization.inputIdFirstPart + this.playerNumber);
-      this.inputDocument.setAttribute(
-        PlayerNameInitialization.inputTypeAttributeName,
-        PlayerNameInitialization.inputTypeAttribute);
-        this.inputDocument.setAttribute(
-          PlayerNameInitialization.inputRequiredAttributeName,
-          PlayerNameInitialization.inputRequiredAttribute);
+    this.inputDocument.setAttribute(
+      PlayerNameInitialization.inputTypeAttributeName,
+      PlayerNameInitialization.inputTypeAttribute);
+    this.inputDocument.setAttribute(
+      PlayerNameInitialization.inputRequiredAttributeName,
+      PlayerNameInitialization.inputRequiredAttribute);
     this.document.appendChild(this.inputDocument);
   }
 }
