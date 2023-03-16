@@ -7,4 +7,8 @@ export class StoneColor {
   constructor(value){
     this.value = value;
   }
+
+  static availableColors(){
+    return [StoneColor.black, StoneColor.white];
+  }
 }
