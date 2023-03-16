@@ -1,5 +1,5 @@
 class SubmitButton {
-  static classes = ['game-initialization', 'd-flex', 'flex-column'];
+  static classes = ['btn', 'btn-primary'];
   document = null;
   
   constructor(){
