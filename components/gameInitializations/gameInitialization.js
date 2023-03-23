@@ -1,4 +1,5 @@
 import { Game } from "../games/game.js";
+import { Player } from "../players/player.js";
 import { PlayerInitialization } from "../playerInitializations/playerInitialization.js";
 import { SubmitButton } from "../submitButtons/submitButton.js";
 import { WarningMessage } from "../warningMessages/warningMessage.js";
@@ -31,7 +32,10 @@ export class GameInitialization {
       this.warningMessage = new WarningMessage('');
     }
     else{
+      const player1 = this.player1Initialization.getValue();
+      const player2 = this.player2Initialization.getValue();
       this.game = new Game();
+      this.game.addPlayers(player1, player2);
     }
   }
 }

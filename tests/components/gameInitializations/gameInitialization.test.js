@@ -49,8 +49,10 @@ test('on sumbit button must validate is players stone colors different, if no sh
   expect(gameInitialization.warningMessage).not.toBe(null);
 });
 
-test('on sumbit button must validate is players stone colors different, if yes create game', () => {
+test('on sumbit button must validate is players stone colors different, if yes create game with players', () => {
   const gameInitialization = new GameInitialization();
   gameInitialization.onSubmitClick();
   expect(gameInitialization.game).not.toBe(null);
+  expect(gameInitialization.game.player1).not.toBe(null);
+  expect(gameInitialization.game.player2).not.toBe(null);
 });
