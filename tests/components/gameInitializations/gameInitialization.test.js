@@ -1,4 +1,5 @@
 import { GameInitialization } from "../../../components/gameInitializations/gameInitialization.js";
+import { PlayerStoneColorInitialization } from "../../../components/playerStoneColorInitializations/playerStoneColorInitialization.js";
 import { StringExtentions } from "../../../extentions/stringExtentions.js";
 
 beforeEach(() => {
@@ -32,4 +33,24 @@ test('game initialization document must contain 2 players, sumbit button initial
   expect(gameInitialization.document.children).toContain(gameInitialization.player1Initialization.document);
   expect(gameInitialization.document.children).toContain(gameInitialization.player2Initialization.document);
   expect(gameInitialization.document.children).toContain(gameInitialization.submitButton.document);
+});
+
+test('on sumbit button must validate is players stone colors different, if no show warning message', () => {
+  const gameInitialization = new GameInitialization();
+  const selectedOption = gameInitialization.player1Initialization.stoneColorInitialization.getSelectedOption();
+  selectedOption.removeAttribute(PlayerStoneColorInitialization.optionSelectedAttributeName);
+  for (const option of gameInitialization.player1Initialization.stoneColorInitialization.selectDocument.children) {
+    if (option.textContent !== selectedOption.textContent) {
+      option.setAttribute(PlayerStoneColorInitialization.optionSelectedAttributeName, '');
+      break;
+    }
+  }
+  gameInitialization.onSubmitClick();
+  expect(gameInitialization.warningMessage).not.toBe(null);
+});
+
+test('on sumbit button must validate is players stone colors different, if yes create game', () => {
+  const gameInitialization = new GameInitialization();
+  gameInitialization.onSubmitClick();
+  expect(gameInitialization.game).not.toBe(null);
 });

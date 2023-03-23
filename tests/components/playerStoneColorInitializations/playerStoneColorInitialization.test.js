@@ -91,3 +91,10 @@ test('player number no 1, stone color initialization select document should have
   }
   expect(whiteOption.getAttribute(PlayerStoneColorInitialization.optionSelectedAttributeName)).toBe('');
 });
+
+test('get selected option must get selected option', () => {
+  const playerNumber = 1;
+  const playerStoneColorInitialization = new PlayerStoneColorInitialization(playerNumber);
+  const selectedOption = playerStoneColorInitialization.getSelectedOption();
+  expect(selectedOption.getAttribute(PlayerStoneColorInitialization.optionSelectedAttributeName)).toBe('');
+});

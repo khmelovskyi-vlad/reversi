@@ -1,9 +1,13 @@
+import { Game } from "../games/game.js";
 import { PlayerInitialization } from "../playerInitializations/playerInitialization.js";
 import { SubmitButton } from "../submitButtons/submitButton.js";
+import { WarningMessage } from "../warningMessages/warningMessage.js";
 
 export class GameInitialization {
   static classes = ['game-initialization', 'd-flex', 'flex-column'];
   document = null;
+  warningMessage = null;
+  game = null;
   
   constructor(){
     this.initDocument();
@@ -20,5 +24,14 @@ export class GameInitialization {
     GameInitialization.classes.forEach(oneClass => {
       this.document.classList.add(oneClass);
     });
+  }
+
+  onSubmitClick(){
+    if (this.player1Initialization.stoneColorInitialization.getSelectedOption().textContent == this.player2Initialization.stoneColorInitialization.getSelectedOption().textContent) {
+      this.warningMessage = new WarningMessage('');
+    }
+    else{
+      this.game = new Game();
+    }
   }
 }

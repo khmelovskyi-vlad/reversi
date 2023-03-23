@@ -73,4 +73,12 @@ export class PlayerStoneColorInitialization {
       this.selectDocument.appendChild(option);
     });
   }
+
+  getSelectedOption(){
+    for (const option of this.selectDocument.children) {
+      if (option.getAttribute(PlayerStoneColorInitialization.optionSelectedAttributeName) === '') {
+        return option;
+      }
+    }
+  }
 }
