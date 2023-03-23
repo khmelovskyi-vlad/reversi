@@ -8,6 +8,16 @@ export class StoneColor {
     this.value = value;
   }
 
+  static getByValue(value){
+    for (const stoneColor of StoneColor.availableColors()) {
+      if (stoneColor.value === value) {
+        return stoneColor;
+      }
+    }
+
+    throw new Error('Color is not available');
+  }
+
   static availableColors(){
     return [StoneColor.black, StoneColor.white];
   }
