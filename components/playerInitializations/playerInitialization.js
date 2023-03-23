@@ -1,5 +1,6 @@
 import { PlayerFirstMoveInitialization } from "../playerFirstMoveInitializations/playerFirstMoveInitialization";
 import { PlayerNameInitialization } from "../playerNameInitializations/playerNameInitialization.js";
+import { Player } from "../players/player";
 import { PlayerStoneColorInitialization } from "../playerStoneColorInitializations/playerStoneColorInitialization";
 
 export class PlayerInitialization {
@@ -22,5 +23,9 @@ export class PlayerInitialization {
     PlayerInitialization.classes.forEach(oneClass => {
       this.document.classList.add(oneClass);
     });
+  }
+
+  getValue(){
+    return new Player(this.nameInitialization.getValue(), this.stoneColorInitialization.getValue(), this.firstMoveInitialization.getValue());
   }
 }

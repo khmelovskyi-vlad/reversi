@@ -1,4 +1,5 @@
 import { PlayerInitialization } from "../../../components/playerInitializations/playerInitialization.js";
+import { StoneColor } from "../../../components/stoneColors/stoneColor.js";
 import { StringExtentions } from "../../../extentions/stringExtentions.js";
 
 beforeEach(() => {
@@ -24,4 +25,12 @@ test('player initialization document must contain name, stone color, first move 
   expect(playerInitialization.document.children).toContain(playerInitialization.nameInitialization.document);
   expect(playerInitialization.document.children).toContain(playerInitialization.stoneColorInitialization.document);
   expect(playerInitialization.document.children).toContain(playerInitialization.firstMoveInitialization.document);
+});
+
+test('getValue must return current player', () => {
+  const playerInitialization = new PlayerInitialization(1);
+  const player = playerInitialization.getValue();
+  expect(player.name).toBe('');
+  expect(player.stoneColor).toBe(StoneColor.black);
+  expect(player.isPlayerFirstMove).toBe(true);
 });
