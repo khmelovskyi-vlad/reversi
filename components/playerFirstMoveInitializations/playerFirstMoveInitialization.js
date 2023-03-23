@@ -71,4 +71,8 @@ export class PlayerFirstMoveInitialization {
     }
     this.document.appendChild(this.inputDocument);
   }
+
+  getValue(){
+    return this.inputDocument.getAttribute(PlayerFirstMoveInitialization.inputCheckedAttributeName) == PlayerFirstMoveInitialization.inputCheckedAttribute;
+  }
 }

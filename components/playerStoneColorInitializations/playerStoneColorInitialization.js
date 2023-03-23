@@ -81,4 +81,8 @@ export class PlayerStoneColorInitialization {
       }
     }
   }
+
+  getValue(){
+    return StoneColor.getByValue(this.getSelectedOption().textContent);
+  }
 }

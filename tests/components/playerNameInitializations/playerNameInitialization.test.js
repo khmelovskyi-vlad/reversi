@@ -64,3 +64,9 @@ test('player name initialization must create input document with required attrib
     .getAttribute(PlayerNameInitialization.inputRequiredAttributeName))
     .toBe(PlayerNameInitialization.inputRequiredAttribute);
 });
+
+test('getValue must return current player name', () => {
+  const playerNumber = 1;
+  const playerNameInitialization = new PlayerNameInitialization(playerNumber);
+  expect(playerNameInitialization.getValue()).toBe(playerNameInitialization.inputDocument.textContent);
+});

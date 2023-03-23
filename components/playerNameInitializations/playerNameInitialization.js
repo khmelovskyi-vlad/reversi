@@ -56,4 +56,8 @@ export class PlayerNameInitialization {
       PlayerNameInitialization.inputRequiredAttribute);
     this.document.appendChild(this.inputDocument);
   }
+
+  getValue(){
+    return this.inputDocument.textContent;
+  }
 }

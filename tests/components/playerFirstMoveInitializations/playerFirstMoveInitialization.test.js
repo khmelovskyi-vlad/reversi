@@ -83,3 +83,9 @@ test('player first move initialization must create input document without checke
     .getAttribute(PlayerFirstMoveInitialization.inputCheckedAttributeName))
     .toBe(null);
 });
+
+test('getValue must return current player first move', () => {
+  const playerNumber = 1;
+  const playerFirstMoveInitialization = new PlayerFirstMoveInitialization(playerNumber);
+  expect(playerFirstMoveInitialization.getValue()).toBe(true);
+});

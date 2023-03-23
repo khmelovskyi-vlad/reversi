@@ -98,3 +98,9 @@ test('get selected option must get selected option', () => {
   const selectedOption = playerStoneColorInitialization.getSelectedOption();
   expect(selectedOption.getAttribute(PlayerStoneColorInitialization.optionSelectedAttributeName)).toBe('');
 });
+
+test('getValue must return current stone color', () => {
+  const playerNumber = 1;
+  const playerStoneColorInitialization = new PlayerStoneColorInitialization(playerNumber);
+  expect(playerStoneColorInitialization.getValue()).toBe(StoneColor.black);
+});
