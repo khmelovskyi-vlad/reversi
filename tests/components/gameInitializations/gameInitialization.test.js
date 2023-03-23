@@ -35,7 +35,7 @@ test('game initialization document must contain 2 players, sumbit button initial
   expect(gameInitialization.document.children).toContain(gameInitialization.submitButton.document);
 });
 
-test('on sumbit button must validate is players stone colors different, if no show warning message', () => {
+test('tryGetValue must validate is players stone colors different, if no show warning message and return null', () => {
   const gameInitialization = new GameInitialization();
   const selectedOption = gameInitialization.player1Initialization.stoneColorInitialization.getSelectedOption();
   selectedOption.removeAttribute(PlayerStoneColorInitialization.optionSelectedAttributeName);
@@ -45,14 +45,15 @@ test('on sumbit button must validate is players stone colors different, if no sh
       break;
     }
   }
-  gameInitialization.onSubmitClick();
+  const game = gameInitialization.tryGetValue();
   expect(gameInitialization.warningMessage).not.toBe(null);
+  expect(game).toBe(null);
 });
 
-test('on sumbit button must validate is players stone colors different, if yes create game with players', () => {
+test('tryGetValue must validate is players stone colors different, if yes return game with players', () => {
   const gameInitialization = new GameInitialization();
-  gameInitialization.onSubmitClick();
-  expect(gameInitialization.game).not.toBe(null);
-  expect(gameInitialization.game.player1).not.toBe(null);
-  expect(gameInitialization.game.player2).not.toBe(null);
+  const game = gameInitialization.tryGetValue();
+  expect(game).not.toBe(null);
+  expect(game.player1).not.toBe(null);
+  expect(game.player2).not.toBe(null);
 });

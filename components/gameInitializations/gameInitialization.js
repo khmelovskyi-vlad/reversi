@@ -8,7 +8,6 @@ export class GameInitialization {
   static classes = ['game-initialization', 'd-flex', 'flex-column'];
   document = null;
   warningMessage = null;
-  game = null;
   
   constructor(){
     this.initDocument();
@@ -27,15 +26,17 @@ export class GameInitialization {
     });
   }
 
-  onSubmitClick(){
+  tryGetValue(){
     if (this.player1Initialization.stoneColorInitialization.getSelectedOption().textContent == this.player2Initialization.stoneColorInitialization.getSelectedOption().textContent) {
       this.warningMessage = new WarningMessage('');
+      return null;
     }
     else{
       const player1 = this.player1Initialization.getValue();
       const player2 = this.player2Initialization.getValue();
-      this.game = new Game();
-      this.game.addPlayers(player1, player2);
+      const game = new Game();
+      game.addPlayers(player1, player2);
+      return game;
     }
   }
 }
