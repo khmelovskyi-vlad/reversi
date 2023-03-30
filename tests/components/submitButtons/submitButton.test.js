@@ -13,3 +13,7 @@ test('submit button must create document with correct text', () => {
   expect(submitButton.document.textContent)
     .toBe(text);
 });
+
+//TODO find how to get event listeners
+// test('submit button must create document with correct event listeners', () => {
+// });

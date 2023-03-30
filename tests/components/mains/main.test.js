@@ -17,3 +17,9 @@ test('main must create document with correct classes', () => {
     expect(main.document.classList).toContain(oneClass);
   });
 });
+
+test('gameInitialization submitButton document must create game on click', () => {
+  const main = new Main();
+  main.gameInitialization.submitButton.document.click();
+  expect(main.game).not.toBe(null);
+});

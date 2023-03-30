@@ -9,13 +9,14 @@ export class GameInitialization {
   document = null;
   warningMessage = null;
   
-  constructor(){
+  constructor(onInitializeGame){
     this.initDocument();
     this.player1Initialization = new PlayerInitialization(1);
     this.document.appendChild(this.player1Initialization.document);
     this.player2Initialization = new PlayerInitialization(2);
     this.document.appendChild(this.player2Initialization.document);
-    this.submitButton = new SubmitButton();
+    this.submitButton = new SubmitButton('');
+    this.submitButton.addClickEventListeners([onInitializeGame]);
     this.document.appendChild(this.submitButton.document);
   }
 

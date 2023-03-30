@@ -2,10 +2,19 @@ import { GameInitialization } from "../gameInitializations/gameInitialization";
 
 export class Main {
   static classes = ['main', 'd-flex', 'justify-content-center'];
+  game = null;
 
   constructor(){
     this.initDocument();
-    this.gameInitialization = new GameInitialization();
+    this.gameInitialization = new GameInitialization(() => this.onInitializeGame());
+  }
+
+  onInitializeGame(){
+    try {
+      this.game = this.gameInitialization.tryGetValue();
+    } catch (error) {
+      console.error(error);
+    }
   }
   
   initDocument(){
