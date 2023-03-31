@@ -17,7 +17,6 @@ export class Cell {
     this.document.setAttribute(Cell.yAttributeName, this.y);
     Cell.classes.forEach(oneClass => {
       this.document.classList.add(oneClass);
-      this.document.classList.add(oneClass);
     });
     this.document.addEventListener('click', () => {
       const x = Number(this.document.getAttribute(Cell.xAttributeName));
