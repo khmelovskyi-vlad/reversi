@@ -163,3 +163,12 @@ test('Next player without players must throw exception', () => {
   game.player1 = PlayerTestFactory.create();
   expect(() => game.nextPlayer).toThrow(Error);
 });
+
+test('On correct move call move', () => {
+  const game = GameTestFactory.create();
+  const currentPlayerColor = game.currentPlayer.stoneColor;
+  const x = Field.halfCellsInRow + 1;
+  const y = Field.halfCellsInColumn;
+  game.field.findCell(x, y).document.click();
+  expect(game.currentPlayer.stoneColor).not.toBe(currentPlayerColor);
+});

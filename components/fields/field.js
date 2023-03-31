@@ -11,11 +11,11 @@ export class Field {
     cells = [];
     document = null;
 
-    constructor(currentPlayer, anotherPlayer){
-        this.create(currentPlayer, anotherPlayer);
+    constructor(currentPlayer, anotherPlayer, onMove){
+        this.create(currentPlayer, anotherPlayer, onMove);
     }
 
-    create(currentPlayer, anotherPlayer){
+    create(currentPlayer, anotherPlayer, onMove){
         if (!currentPlayer || !anotherPlayer) {
             throw new Error('Field without players cannot be created');
         }
@@ -23,7 +23,7 @@ export class Field {
         for (let i = 0; i < Field.cellsInRow; i++) {
             const childDocument = this.initChildDocument();
             for (let j = 0; j < Field.cellsInColumn; j++) {
-                const cell = new Cell(i, j);
+                const cell = new Cell(i, j, onMove);
                 this.addCell(cell, childDocument);
             }
         }
@@ -67,7 +67,7 @@ export class Field {
     }
     
     fillCell(x, y, player){
-        const cell = this.cells.find(cell => cell.x === x && cell.y === y);
+        const cell = this.findCell(x, y);
         if (!cell) {
             throw new Error(`Cell with coordinate x: ${x}, y: ${y} is not found`);
         }

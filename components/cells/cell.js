@@ -5,19 +5,24 @@ export class Cell {
   player = null;
   document = null;
 
-  constructor(x, y){
+  constructor(x, y, onMove){
     this.x = x;
     this.y = y;
-    this.initDocument();
+    this.initDocument(onMove);
   }
 
-  initDocument(){
+  initDocument(onMove){
     this.document = document.createElement('div');
     this.document.setAttribute(Cell.xAttributeName, this.x);
     this.document.setAttribute(Cell.yAttributeName, this.y);
     Cell.classes.forEach(oneClass => {
       this.document.classList.add(oneClass);
       this.document.classList.add(oneClass);
+    });
+    this.document.addEventListener('click', () => {
+      const x = Number(this.document.getAttribute(Cell.xAttributeName));
+      const y = Number(this.document.getAttribute(Cell.yAttributeName));
+      onMove(x, y);
     });
   }
 

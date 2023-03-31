@@ -10,7 +10,7 @@ export class Game {
   start(){
     this.startGameValidation();
     this.currentPlayer = this.selectFirstPlayer();
-    this.field = new Field(this.currentPlayer, this.nextPlayer);
+    this.field = new Field(this.currentPlayer, this.nextPlayer, (x, y) => this.onMove(x, y));
     this.gameWasStarted = true;
   }
 
@@ -46,6 +46,14 @@ export class Game {
     }
     
     throw new Error('No players is with first move');
+  }
+  
+  onMove(x, y){
+    try {
+      this.move(x, y);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   move(x, y){
