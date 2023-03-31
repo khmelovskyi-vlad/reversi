@@ -15,6 +15,7 @@ export class Main {
     try {
       this.game = this.gameInitialization.tryGetValue();
       this.document.removeChild(this.gameInitialization.document);
+      this.document.appendChild(this.game.document);
     } catch (error) {
       console.error(error);
     }

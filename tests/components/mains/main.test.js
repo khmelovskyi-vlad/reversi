@@ -11,16 +11,16 @@ test('main should contain game initialization after creating', () => {
   expect(main.gameInitialization).not.toBe(null);
 });
 
-test('main should contain game initialization document in own document after creating', () => {
+test('main should contains game initialization document in own document after creating', () => {
   const main = new Main();
-  let contaign = false;
+  let contains = false;
   for (const child of main.document.children) {
-    if (main.gameInitialization.document === child) {
-      contaign = true;
+    if (child === main.gameInitialization.document) {
+      contains = true;
       break;
     }
   }    
-  expect(contaign).toBe(true);
+  expect(contains).toBe(true);
 });
 
 test('main must create document with correct classes', () => {
@@ -42,4 +42,17 @@ test('gameInitialization submitButton document must remove gameInitialization do
   for (const child of main.document.children) {
     expect(child).not.toBe(main.gameInitialization.document);
   }
+});
+
+test('gameInitialization submitButton document must add game document', () => {
+  const main = new Main();
+  main.gameInitialization.submitButton.document.click();
+  let contains = false;
+  for (const child of main.document.children) {
+    if (child === main.game.document) {
+      contains = true;
+      break;
+    }
+  }    
+  expect(contains).toBe(true);
 });
