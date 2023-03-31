@@ -53,9 +53,19 @@ test('new cell must create html document with correct classes', () => {
   });
 });
 
-test('Add stone color as class to document', () => {
+test('Add stone color as class to document on fill', () => {
   const cell = new Cell();
   const player = PlayerTestFactory.create();
   cell.fill(player);
   expect(cell.document.classList).toContain(cell.player.stoneColor.value);
+});
+
+test('Change stone color as class to document on fill', () => {
+  const cell = new Cell();
+  const player1 = PlayerTestFactory.create(true);
+  cell.fill(player1);
+  const player2 = PlayerTestFactory.create(false);
+  cell.fill(player2);
+  expect(cell.document.classList).not.toContain(player1.stoneColor.value);
+  expect(cell.document.classList).toContain(player2.stoneColor.value);
 });

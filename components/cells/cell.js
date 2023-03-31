@@ -37,6 +37,9 @@ export class Cell {
       throw new Error('Cannot fill cell with same player');
     }
 
+    if (this.player) {
+      this.document.classList.remove(this.player.stoneColor.value);
+    }
     this.player = player;
     this.document.classList.add(this.player.stoneColor.value);
   }
