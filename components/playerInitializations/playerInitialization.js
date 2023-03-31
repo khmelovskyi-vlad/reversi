@@ -1,7 +1,7 @@
-import { PlayerFirstMoveInitialization } from "../playerFirstMoveInitializations/playerFirstMoveInitialization";
+import { PlayerFirstMoveInitialization } from "../playerFirstMoveInitializations/playerFirstMoveInitialization.js";
 import { PlayerNameInitialization } from "../playerNameInitializations/playerNameInitialization.js";
-import { Player } from "../players/player";
-import { PlayerStoneColorInitialization } from "../playerStoneColorInitializations/playerStoneColorInitialization";
+import { Player } from "../players/player.js";
+import { PlayerStoneColorInitialization } from "../playerStoneColorInitializations/playerStoneColorInitialization.js";
 
 export class PlayerInitialization {
   static classes = ['row', 'm-3'];

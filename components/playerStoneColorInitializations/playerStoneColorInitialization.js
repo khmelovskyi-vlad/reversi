@@ -1,4 +1,4 @@
-import { StoneColor } from "../stoneColors/stoneColor";
+import { StoneColor } from "../stoneColors/stoneColor.js";
 
 export class PlayerStoneColorInitialization {
   static classes = ['col'];

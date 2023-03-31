@@ -1,4 +1,4 @@
-import { GameInitialization } from "../gameInitializations/gameInitialization";
+import { GameInitialization } from "../gameInitializations/gameInitialization.js";
 
 export class Main {
   static classes = ['main', 'd-flex', 'justify-content-center'];

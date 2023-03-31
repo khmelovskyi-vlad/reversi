@@ -1,5 +1,5 @@
-import { Main } from "../../../components/mains/main";
-import { StringExtentions } from "../../../extentions/stringExtentions";
+import { Main } from "../../../components/mains/main.js";
+import { StringExtentions } from "../../../extentions/stringExtentions.js";
 
 beforeEach(() => {
   StringExtentions.run();

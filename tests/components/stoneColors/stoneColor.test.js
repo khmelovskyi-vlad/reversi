@@ -1,4 +1,4 @@
-import { StoneColor } from "../../../components/stoneColors/stoneColor";
+import { StoneColor } from "../../../components/stoneColors/stoneColor.js";
 
 test('available colors must return correct values', () => {
   const colors = StoneColor.availableColors();

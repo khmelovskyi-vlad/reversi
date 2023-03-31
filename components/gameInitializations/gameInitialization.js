@@ -1,5 +1,4 @@
 import { Game } from "../games/game.js";
-import { Player } from "../players/player.js";
 import { PlayerInitialization } from "../playerInitializations/playerInitialization.js";
 import { SubmitButton } from "../submitButtons/submitButton.js";
 import { WarningMessage } from "../warningMessages/warningMessage.js";
@@ -15,7 +14,7 @@ export class GameInitialization {
     this.document.appendChild(this.player1Initialization.document);
     this.player2Initialization = new PlayerInitialization(2);
     this.document.appendChild(this.player2Initialization.document);
-    this.submitButton = new SubmitButton('');
+    this.submitButton = new SubmitButton('Next');
     this.submitButton.addClickEventListeners([onInitializeGame]);
     this.document.appendChild(this.submitButton.document);
   }

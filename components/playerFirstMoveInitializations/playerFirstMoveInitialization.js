@@ -6,7 +6,7 @@ export class PlayerFirstMoveInitialization {
   static labelForAttributeName = 'for';
   static inputIdAttributeName = 'id';
   static inputTypeAttributeName = 'type';
-  static inputTypeAttribute = 'ratio';
+  static inputTypeAttribute = 'radio';
   static labelTextFormat = 'Have first move';
   static inputNameAttributeName = 'name';
   static inputNameAttribute = 'firstMove';
