@@ -165,7 +165,7 @@ export class Game {
   tryTurnOverStone(x, y){
     const cell = this.field.findCell(x, y);
     if (cell.player === this.nextPlayer) {
-      cell.player = this.currentPlayer;
+      cell.fill(this.currentPlayer);
       return true;
     }
     return false;
