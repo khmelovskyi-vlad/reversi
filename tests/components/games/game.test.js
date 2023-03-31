@@ -21,6 +21,20 @@ test('game must create document on start game with correct classes', () => {
   });
 });
 
+test('game must add field document on start', () => {
+  const game = GameTestFactory.createWithoutStart();
+  expect(game.field).toBe(null);
+  game.start();
+  let contains = false;
+  for (const child of game.document.children) {
+    if (child === game.field.document) {
+      contains = true;
+      break;
+    }
+  }    
+  expect(contains).toBe(true);
+});
+
 test('Add two players to game', () => {
   const game = new Game();
   expect(game.player1).toBe(null);

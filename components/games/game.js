@@ -22,6 +22,7 @@ export class Game {
     Game.classes.forEach(oneClass => {
       this.document.classList.add(oneClass);
     });
+    this.document.appendChild(this.field.document);
   }
 
   startGameValidation(){
