@@ -52,3 +52,10 @@ test('new cell must create html document with correct classes', () => {
     expect(cell.document.classList).toContain(oneClass);
   });
 });
+
+test('Add stone color as class to document', () => {
+  const cell = new Cell();
+  const player = PlayerTestFactory.create();
+  cell.fill(player);
+  expect(cell.document.classList).toContain(cell.player.stoneColor.value);
+});

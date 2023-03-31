@@ -38,5 +38,6 @@ export class Cell {
     }
 
     this.player = player;
+    this.document.classList.add(this.player.stoneColor.value);
   }
 }
