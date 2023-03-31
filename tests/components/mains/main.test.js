@@ -36,6 +36,12 @@ test('gameInitialization submitButton document must create game on click', () =>
   expect(main.game).not.toBe(null);
 });
 
+test('gameInitialization submitButton document must start game on click', () => {
+  const main = new Main();
+  main.gameInitialization.submitButton.document.click();
+  expect(main.game.gameWasStarted).toBe(true);
+});
+
 test('gameInitialization submitButton document must remove gameInitialization document', () => {
   const main = new Main();
   main.gameInitialization.submitButton.document.click();
