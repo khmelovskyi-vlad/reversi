@@ -100,6 +100,14 @@ test('Cannot move (throw exception) if game was not started', () => {
   expect(() => game.move()).toThrow(Error);
 });
 
+test('Cannot move (throw exception) if coordinate is out of range', () => {
+  const game = GameTestFactory.create();
+  expect(() => game.move(Field.cellsInRow + 1, 0)).toThrow();
+  expect(() => game.move(0, Field.cellsInColumn + 1)).toThrow();
+  expect(() => game.move(0, 0)).toThrow();
+  expect(() => game.move(0, -1)).toThrow();
+});
+
 test('Change current player after move', () => {
   const game = GameTestFactory.create();
   const x = Field.halfCellsInRow + 1;

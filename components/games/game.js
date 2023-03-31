@@ -72,6 +72,10 @@ export class Game {
       throw new Error('Cannot move if game was not started');
     }
 
+    if (x < 0 || x > Field.cellsInRow || y < 0 || y > Field.cellsInColumn) {
+      throw new Error('Cannot move if coordinates is out of range');
+    }
+
     const turnOverStones = this.turnOverStones(x, y);
     if (turnOverStones === 0) {
       throw new Error('Cannot move without turn over any stone');
