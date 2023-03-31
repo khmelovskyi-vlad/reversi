@@ -10,8 +10,8 @@ test('field must create correct count of cells', () => {
 test('field must create cells with correct indexes', () => {
   const field = FieldTestFactory.create();
   let includesAll = true;
-  for (let i = 0; i < Field.cellsInRow; i++) {
-    for (let j = 0; j < Field.cellsInColumn; j++) {
+  for (let i = 1; i <= Field.cellsInRow; i++) {
+    for (let j = 1; j <= Field.cellsInColumn; j++) {
         if(!field.isExistCell(i, j)){
             includesAll = false;
         }
@@ -23,23 +23,23 @@ test('field must create cells with correct indexes', () => {
 test('field must create empty cells but not in center', () => {
   const field = FieldTestFactory.create();
   const cellsWithoutCenter = field.cells.filter(cell => 
-    !(cell.x === Field.halfCellsInRow && cell.y === Field.halfCellsInColumn - 1)
-    && !(cell.x === Field.halfCellsInRow - 1 && cell.y === Field.halfCellsInColumn)
-    && !(cell.x === Field.halfCellsInRow - 1 && cell.y === Field.halfCellsInColumn - 1)
+    !(cell.x === Field.halfCellsInRow && cell.y === Field.halfCellsInColumn + 1)
+    && !(cell.x === Field.halfCellsInRow + 1 && cell.y === Field.halfCellsInColumn)
+    && !(cell.x === Field.halfCellsInRow + 1 && cell.y === Field.halfCellsInColumn + 1)
     && !(cell.x === Field.halfCellsInRow && cell.y === Field.halfCellsInColumn));
   expect(cellsWithoutCenter.some(cell => !cell.isEmpty)).toBe(false);
 });
 
 test('On fill cell if cell with selected coordinates is not exist throw exception', () => {
   const field = FieldTestFactory.create();
-  expect(() => field.fillCell(Field.cellsInRow + 1, 0, PlayerTestFactory.create(true))).toThrow(Error);
-  expect(() => field.fillCell(0, Field.cellsInColumn + 1, PlayerTestFactory.create(true))).toThrow(Error);
+  expect(() => field.fillCell(Field.cellsInRow + 1, 1, PlayerTestFactory.create(true))).toThrow(Error);
+  expect(() => field.fillCell(1, Field.cellsInColumn + 1, PlayerTestFactory.create(true))).toThrow(Error);
 });
 
 test('If cell with selected coordinates was filled current player throw exception', () => {
   const field = FieldTestFactory.create();
-  const x = 0;
-  const y = 0;
+  const x = 1;
+  const y = 1;
   const player = PlayerTestFactory.create(true);
   field.fillCell(x, y, player);
   expect(() => field.fillCell(x, y, player)).toThrow(Error);
@@ -51,9 +51,9 @@ test('Field must create four fill cells in the middle and other empty cells', ()
   const field = new Field(player1, player2);
   const player1Cells = field.cells.filter(cell => cell.player === player1);
   const player2Cells = field.cells.filter(cell => cell.player === player2);
-  expect(player1Cells.some(cell => cell.x === Field.halfCellsInRow && cell.y === Field.halfCellsInColumn - 1));
-  expect(player1Cells.some(cell => cell.x === Field.halfCellsInRow - 1 && cell.y === Field.halfCellsInColumn));
-  expect(player2Cells.some(cell => cell.x === Field.halfCellsInRow - 1 && cell.y === Field.halfCellsInColumn - 1));
+  expect(player1Cells.some(cell => cell.x === Field.halfCellsInRow && cell.y === Field.halfCellsInColumn + 1));
+  expect(player1Cells.some(cell => cell.x === Field.halfCellsInRow + 1 && cell.y === Field.halfCellsInColumn));
+  expect(player2Cells.some(cell => cell.x === Field.halfCellsInRow + 1 && cell.y === Field.halfCellsInColumn + 1));
   expect(player2Cells.some(cell => cell.x === Field.halfCellsInRow && cell.y === Field.halfCellsInColumn));
 });
 
@@ -65,19 +65,19 @@ test('field without players cannot be created', () => {
 
 test('isExistCell return true if cell with coordinates exists', () => {
   const field = FieldTestFactory.create();
-  expect(field.isExistCell(0, 0)).toBe(true);
+  expect(field.isExistCell(1, 1)).toBe(true);
 });
 
 test('isExistCell return true if cell with coordinates not exists', () => {
   const field = FieldTestFactory.create();
-  expect(field.isExistCell(Field.cellsInRow + 1, 0)).toBe(false);
-  expect(field.isExistCell(0, Field.cellsInColumn + 1)).toBe(false);
+  expect(field.isExistCell(Field.cellsInRow + 1, 1)).toBe(false);
+  expect(field.isExistCell(1, Field.cellsInColumn + 1)).toBe(false);
 });
 
 test('findCell return cell with coordinates if cell exists', () => {
   const field = FieldTestFactory.create();
-  const x = 0;
-  const y = 0;
+  const x = 1;
+  const y = 1;
   expect(field.findCell(x, y)).toBe(field.findCell(x, y));
 });
 

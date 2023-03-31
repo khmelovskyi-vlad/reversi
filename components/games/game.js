@@ -72,7 +72,7 @@ export class Game {
       throw new Error('Cannot move if game was not started');
     }
 
-    if (x < 0 || x > Field.cellsInRow || y < 0 || y > Field.cellsInColumn) {
+    if (x <= 0 || x > Field.cellsInRow || y <= 0 || y > Field.cellsInColumn) {
       throw new Error('Cannot move if coordinates is out of range');
     }
 
@@ -95,8 +95,8 @@ export class Game {
 
   turnOverHorizontalStones(x, y){
     let count = 0;
-    if (x !== 0) {
-      for (let i = x - 1; i >= 0; i--) {
+    if (x !== 1) {
+      for (let i = x - 1; i >= 1; i--) {
         if (this.tryTurnOverStone(i, y)) {
           count++;
           continue;
@@ -105,7 +105,7 @@ export class Game {
       }
     }
     if (x !== Field.cellsInRow) {
-      for (let i = x + 1; i < Field.cellsInRow; i++) {
+      for (let i = x + 1; i <= Field.cellsInRow; i++) {
         if (this.tryTurnOverStone(i, y)) {
           count++;
           continue;
@@ -118,8 +118,8 @@ export class Game {
 
   turnOverVerticalStones(x, y){
     let count = 0;
-    if (y !== 0) {
-      for (let i = y - 1; i >= 0; i--) {
+    if (y !== 1) {
+      for (let i = y - 1; i >= 1; i--) {
         if (this.tryTurnOverStone(x, i)) {
           count++;
           continue;
@@ -128,7 +128,7 @@ export class Game {
       }
     }
     if (y !== Field.cellsInColumn) {
-      for (let i = y + 1; i < Field.cellsInColumn; i++) {
+      for (let i = y + 1; i <= Field.cellsInColumn; i++) {
         if (this.tryTurnOverStone(x, i)) {
           count++;
           continue;
@@ -141,9 +141,9 @@ export class Game {
 
   turnOverDiagonalStones(x, y){
     let count = 0;
-    if (x !== 0 && y !== 0) {
-      for (let i = x - 1; i >= 0; i--) {
-        for (let j = y - 1; j >= 0; j--) {
+    if (x !== 1 && y !== 1) {
+      for (let i = x - 1; i >= 1; i--) {
+        for (let j = y - 1; j >= 1; j--) {
           if (this.tryTurnOverStone(i, j)) {
             count++;
             continue;
@@ -153,8 +153,8 @@ export class Game {
       }
     }
     if (x !== Field.cellsInRow && x !== Field.cellsInColumn) {
-      for (let i = x + 1; i < Field.cellsInRow; i++) {
-        for (let j = y + 1; j < Field.cellsInColumn; j++) {
+      for (let i = x + 1; i <= Field.cellsInRow; i++) {
+        for (let j = y + 1; j <= Field.cellsInColumn; j++) {
           if (this.tryTurnOverStone(i, j)) {
             count++;
             continue;

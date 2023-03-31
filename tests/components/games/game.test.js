@@ -102,24 +102,24 @@ test('Cannot move (throw exception) if game was not started', () => {
 
 test('Cannot move (throw exception) if coordinate is out of range', () => {
   const game = GameTestFactory.create();
-  expect(() => game.move(Field.cellsInRow + 1, 0)).toThrow();
-  expect(() => game.move(0, Field.cellsInColumn + 1)).toThrow();
-  expect(() => game.move(0, 0)).toThrow();
-  expect(() => game.move(0, -1)).toThrow();
+  expect(() => game.move(Field.cellsInRow + 1, 1)).toThrow();
+  expect(() => game.move(1, Field.cellsInColumn + 1)).toThrow();
+  expect(() => game.move(0, 1)).toThrow();
+  expect(() => game.move(1, 0)).toThrow();
 });
 
 test('Change current player after move', () => {
   const game = GameTestFactory.create();
-  const x = Field.halfCellsInRow + 1;
-  const y = Field.halfCellsInColumn;
+  const x = Field.halfCellsInRow;
+  const y = Field.halfCellsInColumn - 1;
   game.move(x, y);
   expect(game.currentPlayer).toBe(game.player2);
 });
 
 test('Cell with selected coordinates must fill current user after move', () => {
   const game = GameTestFactory.create();
-  const x = Field.halfCellsInRow + 1;
-  const y = Field.halfCellsInColumn;
+  const x = Field.halfCellsInRow;
+  const y = Field.halfCellsInColumn - 1;
   game.move(x, y);
   const cell = game.field.findCell(x, y);
   expect(cell).not.toBe(null);
@@ -128,8 +128,8 @@ test('Cell with selected coordinates must fill current user after move', () => {
 
 test('Can move only on coordinates where can turn over any stone', () => {
   const game = GameTestFactory.create();
-  const x = Field.halfCellsInRow + 1;
-  const y = Field.halfCellsInColumn;
+  const x = Field.halfCellsInRow;
+  const y = Field.halfCellsInColumn - 1;
   expect(() => game.move(x, y)).not.toThrow();
 });
 
@@ -142,21 +142,21 @@ test('Cannot move (throw error) coordinates where can not turn over any stone', 
 
 test('Cells horizontally for current player cell must fill current player after move', () => {
   const game = GameTestFactory.create();
-  const x = Field.halfCellsInRow + 1;
-  const y = Field.halfCellsInColumn;
+  const x = Field.halfCellsInRow;
+  const y = Field.halfCellsInColumn - 1;
   game.move(x, y);
   const cells = game.field.cells.filter(cell => 
-    cell.x === x - 1 && cell.y === y);
+    cell.x === x && cell.y === y);
   expect(cells.every(cell => cell.player === game.player1)).toBe(true);
 });
 
 test('Cells vertically for current player cell must fill current player after move', () => {
   const game = GameTestFactory.create();
-  const x = Field.halfCellsInRow;
-  const y = Field.halfCellsInColumn + 1;
+  const x = Field.halfCellsInRow - 1;
+  const y = Field.halfCellsInColumn;
   game.move(x, y);
   const cells = game.field.cells.filter(cell => 
-    cell.x === x && cell.y === y - 1);
+    cell.x === x && cell.y === y);
   expect(cells.every(cell => cell.player === game.player1)).toBe(true);
 });
 
@@ -165,7 +165,7 @@ test('Cells diagonally for current player cell must fill current player after mo
   const x = Field.halfCellsInRow + 1;
   const y = Field.halfCellsInColumn;
   game.field.findCell(x, y).player = game.nextPlayer;
-  game.move(x + 1, y + 1);
+  game.move(x + 1, y - 1);
   const cells = game.field.cells.filter(cell => 
     cell.x === x && cell.y === y);
   expect(cells.every(cell => cell.player === game.player1)).toBe(true);
@@ -197,8 +197,8 @@ test('Next player without players must throw exception', () => {
 test('On correct move call move', () => {
   const game = GameTestFactory.create();
   const currentPlayerColor = game.currentPlayer.stoneColor;
-  const x = Field.halfCellsInRow + 1;
-  const y = Field.halfCellsInColumn;
+  const x = Field.halfCellsInRow;
+  const y = Field.halfCellsInColumn - 1;
   game.field.findCell(x, y).document.click();
   expect(game.currentPlayer.stoneColor).not.toBe(currentPlayerColor);
 });
