@@ -130,8 +130,7 @@ test('Can move only on coordinates where can turn over any stone', () => {
   const game = GameTestFactory.create();
   const x = Field.halfCellsInRow + 1;
   const y = Field.halfCellsInColumn;
-  game.move(x, y);
-  expect(true).toBe(true);
+  expect(() => game.move(x, y)).not.toThrow();
 });
 
 test('Cannot move (throw error) coordinates where can not turn over any stone', () => {
