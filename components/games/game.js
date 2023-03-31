@@ -1,8 +1,10 @@
 import { Field } from "../fields/field.js";
 
 export class Game {
+  static classes = ['game'];
   field = null;
   currentPlayer = null;
+  document = null;
   player1 = null;
   player2 = null;
   gameWasStarted = false;
@@ -12,6 +14,14 @@ export class Game {
     this.currentPlayer = this.selectFirstPlayer();
     this.field = new Field(this.currentPlayer, this.nextPlayer, (x, y) => this.onMove(x, y));
     this.gameWasStarted = true;
+    this.createDocument();
+  }
+
+  createDocument(){
+    this.document = document.createElement('div');
+    Game.classes.forEach(oneClass => {
+      this.document.classList.add(oneClass);
+    });
   }
 
   startGameValidation(){
