@@ -1,4 +1,5 @@
 import { Field } from "../fields/field.js";
+import { WarningMessage } from "../warningMessages/warningMessage.js";
 
 export class Game {
   static classes = ['game'];
@@ -8,6 +9,7 @@ export class Game {
   player1 = null;
   player2 = null;
   winnerPlayer = null;
+  wanringMessage = null;
   gameWasStarted = false;
   isGameFinished = false;
 
@@ -65,6 +67,8 @@ export class Game {
     try {
       this.move(x, y);
     } catch (error) {
+      this.wanringMessage = new WarningMessage('error');
+      this.document.insertBefore(this.wanringMessage.document, this.field.document);
       console.error(error);
     }
   }

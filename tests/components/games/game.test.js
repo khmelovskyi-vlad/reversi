@@ -259,3 +259,43 @@ test('winnerPlayer must be correct on finishing game', () => {
   game.move(x + 2, y + 2);
   expect(game.winnerPlayer).toBe(currentPlayer);
 });
+
+test('warningMessage must not be null on error', () => {
+  const game = GameTestFactory.create();
+  const x = Field.halfCellsInColumn;
+  const y = Field.halfCellsInRow;
+  game.onMove(x + 2, y + 2);
+  expect(game.wanringMessage).not.toBe(null);
+});
+
+test('warningMessage must be in document on error', () => {
+  const game = GameTestFactory.create();
+  const x = Field.halfCellsInColumn;
+  const y = Field.halfCellsInRow;
+  game.onMove(x + 2, y + 2);
+  let contains = false;
+  for (const child of game.document.children) {
+    if (child === game.wanringMessage.document) {
+      contains = true;
+    }
+  }
+  expect(contains).toBe(true);
+});
+
+test('warningMessage must be before field in document on error', () => {
+  const game = GameTestFactory.create();
+  const x = Field.halfCellsInColumn;
+  const y = Field.halfCellsInRow;
+  game.onMove(x + 2, y + 2);
+  let elementFound = 0;
+  console.log(game.document.children);
+  for (const child of game.document.children) {
+    if (child === game.wanringMessage.document) {
+      elementFound++;
+    }
+    else if (elementFound === 1 && child === game.field.document) {
+      elementFound++;
+    }
+  }
+  expect(elementFound).toBe(2);
+});
