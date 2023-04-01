@@ -8,6 +8,7 @@ export class Game {
   player1 = null;
   player2 = null;
   gameWasStarted = false;
+  isGameFinished = false;
 
   start(){
     this.startGameValidation();
@@ -87,10 +88,32 @@ export class Game {
 
     this.turnOverCells(cells);
     this.field.fillCell(x, y, this.currentPlayer);
+    if (this.detectFinishGame()) {
+      return;
+    }
     this.changeCurrentPlayer();
     if (!this.haveMove()) {
       this.changeCurrentPlayer();
     }
+  }
+
+  detectFinishGame(){
+    if (!this.pleyerHaveCells(this.nextPlayer)) {
+      this.isGameFinished = true;
+    }
+
+    return this.isGameFinished;
+  }
+
+  pleyerHaveCells(player){
+    for (let i = 0; i < this.field.cells.length; i++) {
+      const cell = this.field.cells[i];
+      if (cell.player === player) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   haveMove(){

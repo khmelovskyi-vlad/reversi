@@ -154,6 +154,7 @@ test('If next player does not have move current player does not change', () => {
   const x = Field.halfCellsInColumn;
   const y = Field.halfCellsInRow;
   game.field.findCell(x, y).player = game.currentPlayer;
+  game.field.findCell(x + 4, y + 4).player = game.currentPlayer;
   game.move(x + 2, y + 2);
   expect(game.currentPlayer).toBe(currentPlayer);
 });
@@ -237,4 +238,13 @@ test('On correct move call move', () => {
   const y = Field.halfCellsInRow - 1;
   game.field.findCell(x, y).document.click();
   expect(game.currentPlayer.stoneColor).not.toBe(currentPlayerColor);
+});
+
+test('isGameFinished is true when game is finished', () => {
+  const game = GameTestFactory.create();
+  const x = Field.halfCellsInColumn;
+  const y = Field.halfCellsInRow;
+  game.field.findCell(x, y).player = game.currentPlayer;
+  game.move(x + 2, y + 2);
+  expect(game.isGameFinished).toBe(true);
 });
