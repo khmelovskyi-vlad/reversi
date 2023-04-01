@@ -354,7 +354,7 @@ test('warningMessage must not be null on error', () => {
   const x = Field.halfCellsInColumn;
   const y = Field.halfCellsInRow;
   game.onMove(x + 2, y + 2);
-  expect(game.wanringMessage).not.toBe(null);
+  expect(game.warningMessage).not.toBe(null);
 });
 
 test('warningMessage must be in document on error', () => {
@@ -364,7 +364,7 @@ test('warningMessage must be in document on error', () => {
   game.onMove(x + 2, y + 2);
   let contains = false;
   for (const child of game.document.children) {
-    if (child === game.wanringMessage.document) {
+    if (child === game.warningMessage.document) {
       contains = true;
     }
   }
@@ -378,7 +378,7 @@ test('warningMessage must be before field in document on error', () => {
   game.onMove(x + 2, y + 2);
   let elementFound = 0;
   for (const child of game.document.children) {
-    if (child === game.wanringMessage.document) {
+    if (child === game.warningMessage.document) {
       elementFound++;
     }
     else if (elementFound === 1 && child === game.field.document) {
@@ -386,4 +386,28 @@ test('warningMessage must be before field in document on error', () => {
     }
   }
   expect(elementFound).toBe(2);
+});
+
+test('warningMessage must be null on correct move', () => {
+  const game = GameTestFactory.create();
+  const x = Field.halfCellsInColumn;
+  const y = Field.halfCellsInRow;
+  game.onMove(x + 2, y + 2);
+  game.onMove(x, y - 1);
+  expect(game.warningMessage).toBe(null);
+});
+
+test('warningMessage must not to be in document on correct move', () => {
+  const game = GameTestFactory.create();
+  const x = Field.halfCellsInColumn;
+  const y = Field.halfCellsInRow;
+  game.onMove(x + 2, y + 2);
+  game.onMove(x, y - 1);
+  let contains = false;
+  for (const child of game.document.children) {
+    if (child === game.warningMessage?.document) {
+      contains = true;
+    }
+  }
+  expect(contains).toBe(false);
 });

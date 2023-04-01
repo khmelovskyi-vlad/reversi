@@ -13,7 +13,7 @@ export class Game {
   winnerPlayer = null;
   winningMessage = null;
   playNext = null;
-  wanringMessage = null;
+  warningMessage = null;
   gameWasStarted = false;
   isGameFinished = false;
 
@@ -71,8 +71,8 @@ export class Game {
     try {
       this.move(x, y);
     } catch (error) {
-      this.wanringMessage = new WarningMessage('error');
-      this.document.insertBefore(this.wanringMessage.document, this.field.document);
+      this.warningMessage = new WarningMessage('error');
+      this.document.insertBefore(this.warningMessage.document, this.field.document);
       console.error(error);
     }
   }
@@ -98,12 +98,14 @@ export class Game {
     this.turnOverCells(cells);
     this.field.fillCell(x, y, this.currentPlayer);
     if (this.detectFinishGame()) {
+      this.removeWarningMessage();
       return;
     }
     this.changeCurrentPlayer();
     if (!this.haveMove()) {
       this.changeCurrentPlayer();
     }
+    this.removeWarningMessage();
   }
 
   detectFinishGame(){
@@ -118,6 +120,13 @@ export class Game {
     }
 
     return this.isGameFinished;
+  }
+
+  removeWarningMessage(){
+    if (this.warningMessage) {
+      this.document.removeChild(this.warningMessage.document);
+      this.warningMessage = null;
+    }
   }
 
   onNextClick(){
