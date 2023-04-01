@@ -10,9 +10,9 @@ export class GameInitialization {
   
   constructor(onInitializeGame){
     this.initDocument();
-    this.player1Initialization = new PlayerInitialization(1);
+    this.player1Initialization = new PlayerInitialization(1, (playerNumber) => this.onFirstMoveClick(playerNumber));
     this.document.appendChild(this.player1Initialization.document);
-    this.player2Initialization = new PlayerInitialization(2);
+    this.player2Initialization = new PlayerInitialization(2, (playerNumber) => this.onFirstMoveClick(playerNumber));
     this.document.appendChild(this.player2Initialization.document);
     this.submitButton = new SubmitButton('Next');
     this.submitButton.addClickEventListeners([onInitializeGame]);
@@ -37,6 +37,17 @@ export class GameInitialization {
       const game = new Game();
       game.addPlayers(player1, player2);
       return game;
+    }
+  }
+
+  onFirstMoveClick(playerNumber){
+    if (playerNumber === 1) {
+      this.player1Initialization.firstMoveInitialization.makeChecked();
+      this.player2Initialization.firstMoveInitialization.removeChecked();
+    }
+    else if (playerNumber === 2){
+      this.player2Initialization.firstMoveInitialization.makeChecked();
+      this.player1Initialization.firstMoveInitialization.removeChecked();
     }
   }
 }

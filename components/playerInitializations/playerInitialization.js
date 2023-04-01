@@ -7,14 +7,14 @@ export class PlayerInitialization {
   static classes = ['row', 'm-3'];
   document = null;
 
-  constructor(playerNumber){
+  constructor(playerNumber, onFirstMoveClick){
     this.playerNumber = playerNumber;
     this.initDocument();
     this.nameInitialization = new PlayerNameInitialization(this.playerNumber);
     this.document.appendChild(this.nameInitialization.document);
     this.stoneColorInitialization = new PlayerStoneColorInitialization(this.playerNumber);
     this.document.appendChild(this.stoneColorInitialization.document);
-    this.firstMoveInitialization = new PlayerFirstMoveInitialization(this.playerNumber);
+    this.firstMoveInitialization = new PlayerFirstMoveInitialization(this.playerNumber, onFirstMoveClick);
     this.document.appendChild(this.firstMoveInitialization.document);
   }
 

@@ -57,3 +57,13 @@ test('tryGetValue must validate is players stone colors different, if yes return
   expect(game.player1).not.toBe(null);
   expect(game.player2).not.toBe(null);
 });
+
+test('onFirstMoveClick change first move to need player', () => {
+  const gameInitialization = new GameInitialization();
+  gameInitialization.player1Initialization.firstMoveInitialization.document.click();
+  expect(gameInitialization.player1Initialization.firstMoveInitialization.getValue()).toBe(true);
+  expect(gameInitialization.player2Initialization.firstMoveInitialization.getValue()).toBe(false);
+  gameInitialization.player2Initialization.firstMoveInitialization.document.click();
+  expect(gameInitialization.player2Initialization.firstMoveInitialization.getValue()).toBe(true);
+  expect(gameInitialization.player1Initialization.firstMoveInitialization.getValue()).toBe(false);
+});

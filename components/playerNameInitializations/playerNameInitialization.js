@@ -58,6 +58,6 @@ export class PlayerNameInitialization {
   }
 
   getValue(){
-    return this.inputDocument.textContent;
+    return this.inputDocument.value;
   }
 }
