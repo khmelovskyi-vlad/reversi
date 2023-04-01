@@ -11,6 +11,7 @@ export class PlayerStoneColorInitialization {
   static selectRequiredAttributeName = 'required';
   static selectRequiredAttribute = '';
   static optionSelectedAttributeName = 'selected';
+  static optionSelectedAttribute = '';
   document = null;
   labelDocument = null;
   selectDocument = null;
@@ -56,6 +57,7 @@ export class PlayerStoneColorInitialization {
     this.selectDocument.setAttribute(
       PlayerStoneColorInitialization.selectRequiredAttributeName,
       PlayerStoneColorInitialization.selectRequiredAttribute);
+    this.selectDocument.addEventListener('change', (event) => this.onChange(event))
     this.document.appendChild(this.selectDocument);
   }
 
@@ -64,10 +66,14 @@ export class PlayerStoneColorInitialization {
     colors.forEach(color => {
       const option = document.createElement('option');
       if (this.playerNumber === 1 && color === StoneColor.black) {
-        option.setAttribute(PlayerStoneColorInitialization.optionSelectedAttributeName, '');
+        option.setAttribute(
+          PlayerStoneColorInitialization.optionSelectedAttributeName,
+          PlayerStoneColorInitialization.optionSelectedAttribute);
       }
       else if (this.playerNumber !== 1 && color === StoneColor.white) {
-        option.setAttribute(PlayerStoneColorInitialization.optionSelectedAttributeName, '');
+        option.setAttribute(
+          PlayerStoneColorInitialization.optionSelectedAttributeName,
+          PlayerStoneColorInitialization.optionSelectedAttribute);
       }
       option.textContent = color.value;
       this.selectDocument.appendChild(option);
@@ -76,7 +82,21 @@ export class PlayerStoneColorInitialization {
 
   getSelectedOption(){
     for (const option of this.selectDocument.children) {
-      if (option.getAttribute(PlayerStoneColorInitialization.optionSelectedAttributeName) === '') {
+      if (
+        option.getAttribute(PlayerStoneColorInitialization.optionSelectedAttributeName) 
+          === PlayerStoneColorInitialization.optionSelectedAttribute) {
+        return option;
+      }
+    }
+  }
+
+  getOptionByColor(color){
+    return this.getOptionByColorValue(color.value);
+  }
+
+  getOptionByColorValue(color){
+    for (const option of this.selectDocument.children) {
+      if (option.value === color) {
         return option;
       }
     }
@@ -84,5 +104,24 @@ export class PlayerStoneColorInitialization {
 
   getValue(){
     return StoneColor.getByValue(this.getSelectedOption().textContent);
+  }
+
+  onChange(event){
+    const color = StoneColor.getByValue(event.target.value);
+    const oldSelectedOption = this.getSelectedOption();
+    this.removeSelected(oldSelectedOption);
+    const newSelectedOption = this.getOptionByColor(color);
+    this.makeSelected(newSelectedOption);
+  }
+
+  makeSelected(option){
+    option.setAttribute(
+      PlayerStoneColorInitialization.optionSelectedAttributeName,
+      PlayerStoneColorInitialization.optionSelectedAttribute);
+  }
+
+  removeSelected(option){
+    option.removeAttribute(
+      PlayerStoneColorInitialization.optionSelectedAttributeName);
   }
 }
