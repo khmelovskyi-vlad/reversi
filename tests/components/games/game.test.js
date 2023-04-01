@@ -260,6 +260,49 @@ test('winnerPlayer must be correct on finishing game', () => {
   expect(game.winnerPlayer).toBe(currentPlayer);
 });
 
+test('winningMessage must be not null on finishing game', () => {
+  const game = GameTestFactory.create();
+  expect(game.winningMessage).toBe(null);
+  const x = Field.halfCellsInColumn;
+  const y = Field.halfCellsInRow;
+  game.field.findCell(x, y).player = game.currentPlayer;
+  game.move(x + 2, y + 2);
+  expect(game.winningMessage).not.toBe(null);
+});
+
+test('winningMessage must be in document on finish game', () => {
+  const game = GameTestFactory.create();
+  const x = Field.halfCellsInColumn;
+  const y = Field.halfCellsInRow;
+  game.field.findCell(x, y).player = game.currentPlayer;
+  game.onMove(x + 2, y + 2);
+  let contains = false;
+  for (const child of game.document.children) {
+    if (child === game.winningMessage.document) {
+      contains = true;
+    }
+  }
+  expect(contains).toBe(true);
+});
+
+test('winningMessage must be before field in document on finish game', () => {
+  const game = GameTestFactory.create();
+  const x = Field.halfCellsInColumn;
+  const y = Field.halfCellsInRow;
+  game.field.findCell(x, y).player = game.currentPlayer;
+  game.onMove(x + 2, y + 2);
+  let elementFound = 0;
+  for (const child of game.document.children) {
+    if (child === game.winningMessage.document) {
+      elementFound++;
+    }
+    else if (elementFound === 1 && child === game.field.document) {
+      elementFound++;
+    }
+  }
+  expect(elementFound).toBe(2);
+});
+
 test('warningMessage must not be null on error', () => {
   const game = GameTestFactory.create();
   const x = Field.halfCellsInColumn;
@@ -288,7 +331,6 @@ test('warningMessage must be before field in document on error', () => {
   const y = Field.halfCellsInRow;
   game.onMove(x + 2, y + 2);
   let elementFound = 0;
-  console.log(game.document.children);
   for (const child of game.document.children) {
     if (child === game.wanringMessage.document) {
       elementFound++;

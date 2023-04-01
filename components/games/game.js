@@ -1,5 +1,6 @@
 import { Field } from "../fields/field.js";
 import { WarningMessage } from "../warningMessages/warningMessage.js";
+import { WinningMessage } from "../winningMessages/winningMessage.js";
 
 export class Game {
   static classes = ['game'];
@@ -9,6 +10,7 @@ export class Game {
   player1 = null;
   player2 = null;
   winnerPlayer = null;
+  winningMessage = null;
   wanringMessage = null;
   gameWasStarted = false;
   isGameFinished = false;
@@ -106,6 +108,8 @@ export class Game {
     if (!this.pleyerHaveCells(this.nextPlayer)) {
       this.isGameFinished = true;
       this.winnerPlayer = this.currentPlayer;
+      this.winningMessage = new WinningMessage(`${this.currentPlayer.name} won`);
+      this.document.insertBefore(this.winningMessage.document, this.field.document);
     }
 
     return this.isGameFinished;
