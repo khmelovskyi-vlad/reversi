@@ -148,6 +148,16 @@ test('Can not move to filled cell', () => {
   expect(() => game.move(x + 2, y)).toThrow();
 });
 
+test('If next player does not have move current player does not change', () => {
+  const game = GameTestFactory.create();
+  const currentPlayer = game.currentPlayer;
+  const x = Field.halfCellsInColumn;
+  const y = Field.halfCellsInRow;
+  game.field.findCell(x, y).player = game.currentPlayer;
+  game.move(x + 2, y + 2);
+  expect(game.currentPlayer).toBe(currentPlayer);
+});
+
 test('Cells horizontally for current player cell must fill current player after move', () => {
   const game = GameTestFactory.create();
   const x = Field.halfCellsInColumn;

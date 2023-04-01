@@ -88,6 +88,23 @@ export class Game {
     this.turnOverCells(cells);
     this.field.fillCell(x, y, this.currentPlayer);
     this.changeCurrentPlayer();
+    if (!this.haveMove()) {
+      this.changeCurrentPlayer();
+    }
+  }
+
+  haveMove(){
+    const emptyCells = this.field.getEmptyCells();
+    for (let i = 0; i < emptyCells.length; i++) {
+      const emptyCell = emptyCells[i];
+      const turnOverCells = this.turnOverStones(emptyCell.x, emptyCell.y);
+
+      if (turnOverCells.length > 0) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   turnOverCells(cells){
@@ -101,7 +118,6 @@ export class Game {
     this.turnOverHorizontalStones(x, y, turnOverCells);
     this.turnOverVerticalStones(x, y, turnOverCells);
     this.turnOverDiagonalStones(x, y, turnOverCells);
-    console.log(turnOverCells.length);
     return turnOverCells;
   }
 
@@ -168,7 +184,7 @@ export class Game {
       const tempCells = [];
       let i = x - 1;
       let j = y - 1;
-      while (i > 1 || j > 1) {
+      while (i >= 1 && j >= 1) {
         const cell = this.field.findCell(i, j);
         if (this.tryTurnOverStone(cell, tempCells, turnOverCells)) {
           break;
@@ -181,7 +197,7 @@ export class Game {
       const tempCells = [];
       let i = x + 1;
       let j = y + 1;
-      while (i < Field.cellsInColumn || j < Field.cellsInRow) {
+      while (i <= Field.cellsInColumn && j <= Field.cellsInRow) {
         const cell = this.field.findCell(i, j);
         if (this.tryTurnOverStone(cell, tempCells, turnOverCells)) {
           break;
@@ -194,7 +210,7 @@ export class Game {
       const tempCells = [];
       let i = x + 1;
       let j = y - 1;
-      while (i < Field.cellsInColumn || j > 1) {
+      while (i <= Field.cellsInColumn && j >= 1) {
         const cell = this.field.findCell(i, j);
         if (this.tryTurnOverStone(cell, tempCells, turnOverCells)) {
           break;
@@ -207,7 +223,7 @@ export class Game {
       const tempCells = [];
       let i = x - 1;
       let j = y + 1;
-      while (i > 1 || j < Field.cellsInRow) {
+      while (i >= 1 && j <= Field.cellsInRow) {
         const cell = this.field.findCell(i, j);
         if (this.tryTurnOverStone(cell, tempCells, turnOverCells)) {
           break;
