@@ -1,14 +1,16 @@
 import { PlayerFirstMoveInitialization } from "../../../components/playerFirstMoveInitializations/playerFirstMoveInitialization.js";
 
 test('player first move initialization must create document with correct classes', () => {
-  const playerFirstMoveInitialization = new PlayerFirstMoveInitialization(1); 
+  const playerNumber = 1;
+  const playerFirstMoveInitialization = new PlayerFirstMoveInitialization(playerNumber); 
   PlayerFirstMoveInitialization.classes.forEach(oneClass => {
     expect(playerFirstMoveInitialization.document.classList).toContain(oneClass);
   });
 });
 
 test('player first move initialization must create label document with correct classes', () => {
-  const playerFirstMoveInitialization = new PlayerFirstMoveInitialization(1);
+  const playerNumber = 1;
+  const playerFirstMoveInitialization = new PlayerFirstMoveInitialization(playerNumber);
   PlayerFirstMoveInitialization.labelClasses.forEach(oneClass => {
     expect(playerFirstMoveInitialization.labelDocument.classList).toContain(oneClass);
   });
@@ -88,4 +90,24 @@ test('getValue must return current player first move', () => {
   const playerNumber = 1;
   const playerFirstMoveInitialization = new PlayerFirstMoveInitialization(playerNumber);
   expect(playerFirstMoveInitialization.getValue()).toBe(true);
+});
+
+test('makeChecked must change checked to true and add attribute', () => {
+  const playerNumber = 1;
+  const playerFirstMoveInitialization = new PlayerFirstMoveInitialization(playerNumber);
+  playerFirstMoveInitialization.makeChecked();
+  expect(playerFirstMoveInitialization.checked).toBe(true);
+  expect(playerFirstMoveInitialization.inputDocument
+    .getAttribute(PlayerFirstMoveInitialization.inputCheckedAttributeName))
+    .toBe(PlayerFirstMoveInitialization.inputCheckedAttribute);
+});
+
+test('removeChecked must change checked to false and remove attribute', () => {
+  const playerNumber = 1;
+  const playerFirstMoveInitialization = new PlayerFirstMoveInitialization(playerNumber);
+  playerFirstMoveInitialization.removeChecked();
+  expect(playerFirstMoveInitialization.checked).toBe(false);
+  expect(playerFirstMoveInitialization.inputDocument
+    .getAttribute(PlayerFirstMoveInitialization.inputCheckedAttributeName))
+    .toBe(null);
 });

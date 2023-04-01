@@ -18,21 +18,24 @@ export class PlayerFirstMoveInitialization {
   labelDocument = null;
   inputDocument = null;
   
-  constructor(playerNumber){
+  constructor(playerNumber, onClick){
     this.playerNumber = playerNumber;
     if(this.playerNumber === 1){
       this.checked = true;
     }
-    this.initDocument();
+    this.initDocument(onClick);
     this.initLabel();
     this.initInput();
   }
 
-  initDocument(){
+  initDocument(onClick){
     this.document = document.createElement('div');
     PlayerFirstMoveInitialization.classes.forEach(oneClass => {
       this.document.classList.add(oneClass);
     });
+    if (onClick) {
+      this.document.addEventListener('click', () => onClick(this.playerNumber));
+    }
   }
 
   initLabel(){
@@ -70,6 +73,23 @@ export class PlayerFirstMoveInitialization {
         PlayerFirstMoveInitialization.inputCheckedAttribute);
     }
     this.document.appendChild(this.inputDocument);
+  }
+
+  makeChecked(){
+    if (!this.checked) {
+      this.checked = true;
+      this.inputDocument.setAttribute(
+        PlayerFirstMoveInitialization.inputCheckedAttributeName,
+        PlayerFirstMoveInitialization.inputCheckedAttribute);
+    }
+  }
+
+  removeChecked(){
+    if (this.checked) {
+      this.checked = false;
+      this.inputDocument.removeAttribute(
+        PlayerFirstMoveInitialization.inputCheckedAttributeName);
+    }
   }
 
   getValue(){
