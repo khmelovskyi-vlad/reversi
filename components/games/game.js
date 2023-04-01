@@ -1,4 +1,5 @@
 import { Field } from "../fields/field.js";
+import { InfoMessage } from "../infoMessages/infoMessage.js";
 import { SubmitButton } from "../submitButtons/submitButton.js";
 import { WarningMessage } from "../warningMessages/warningMessage.js";
 import { WinningMessage } from "../winningMessages/winningMessage.js";
@@ -14,6 +15,7 @@ export class Game {
   winningMessage = null;
   playNext = null;
   warningMessage = null;
+  infoMessage = null;
   gameWasStarted = false;
   isGameFinished = false;
 
@@ -71,6 +73,7 @@ export class Game {
     try {
       this.move(x, y);
     } catch (error) {
+      this.removeMessages();
       this.warningMessage = new WarningMessage('error');
       this.document.insertBefore(this.warningMessage.document, this.field.document);
       console.error(error);
@@ -97,15 +100,15 @@ export class Game {
 
     this.turnOverCells(cells);
     this.field.fillCell(x, y, this.currentPlayer);
+    this.removeMessages();
     if (this.detectFinishGame()) {
-      this.removeWarningMessage();
       return;
     }
     this.changeCurrentPlayer();
     if (!this.haveMove()) {
+      this.addNoMoveMessage();
       this.changeCurrentPlayer();
     }
-    this.removeWarningMessage();
   }
 
   detectFinishGame(){
@@ -120,6 +123,18 @@ export class Game {
     }
 
     return this.isGameFinished;
+  }
+
+  removeMessages(){
+    this.removeInfoMessage();
+    this.removeWarningMessage();
+  }
+
+  removeInfoMessage(){
+    if (this.infoMessage) {
+      this.document.removeChild(this.infoMessage.document);
+      this.infoMessage = null;
+    }
   }
 
   removeWarningMessage(){
@@ -142,6 +157,11 @@ export class Game {
     }
 
     return false;
+  }
+
+  addNoMoveMessage(){
+    this.infoMessage = new InfoMessage('No move');
+    this.document.insertBefore(this.infoMessage.document, this.field.document);
   }
 
   haveMove(){

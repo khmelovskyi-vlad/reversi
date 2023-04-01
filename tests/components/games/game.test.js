@@ -154,9 +154,90 @@ test('If next player does not have move current player does not change', () => {
   const x = Field.halfCellsInColumn;
   const y = Field.halfCellsInRow;
   game.field.findCell(x, y).player = game.currentPlayer;
-  game.field.findCell(x + 4, y + 4).player = game.currentPlayer;
+  game.field.findCell(x + 4, y + 4).player = game.nextPlayer;
   game.move(x + 2, y + 2);
   expect(game.currentPlayer).toBe(currentPlayer);
+});
+
+test('If next player does not have move add infoMessage', () => {
+  const game = GameTestFactory.create();
+  expect(game.infoMessage).toBe(null);
+  const currentPlayer = game.currentPlayer;
+  const x = Field.halfCellsInColumn;
+  const y = Field.halfCellsInRow;
+  game.field.findCell(x, y).player = game.currentPlayer;
+  game.field.findCell(x + 4, y + 4).player = game.nextPlayer;
+  game.move(x + 2, y + 2);
+  expect(game.infoMessage).not.toBe(null);
+});
+
+test('If next player does not have move add infoMessage document to document', () => {
+  const game = GameTestFactory.create();
+  expect(game.infoMessage).toBe(null);
+  const x = Field.halfCellsInColumn;
+  const y = Field.halfCellsInRow;
+  game.field.findCell(x, y).player = game.currentPlayer;
+  game.field.findCell(x + 4, y + 4).player = game.nextPlayer;
+  game.move(x + 2, y + 2);
+  let contains = false;
+  for (const child of game.document.children) {
+    if (child === game.infoMessage.document) {
+      contains = true;
+    }
+  }
+  expect(contains).toBe(true);
+});
+
+test('If next player does not have move add infoMessage document to document before field', () => {
+  const game = GameTestFactory.create();
+  expect(game.infoMessage).toBe(null);
+  const x = Field.halfCellsInColumn;
+  const y = Field.halfCellsInRow;
+  game.field.findCell(x, y).player = game.currentPlayer;
+  game.field.findCell(x + 4, y + 4).player = game.nextPlayer;
+  game.move(x + 2, y + 2);
+  let elementFound = 0;
+  for (const child of game.document.children) {
+    if (child === game.infoMessage.document) {
+      elementFound++;
+    }
+    else if (elementFound === 1 && child === game.field.document) {
+      elementFound++;
+    }
+  }
+  expect(elementFound).toBe(2);
+});
+
+test('infoMessage must be null on correct move', () => {
+  const game = GameTestFactory.create();
+  expect(game.infoMessage).toBe(null);
+  const x = Field.halfCellsInColumn;
+  const y = Field.halfCellsInRow;
+  game.field.findCell(x, y).player = game.currentPlayer;
+  game.field.findCell(x + 4, y + 3).player = game.nextPlayer;
+  game.move(x + 2, y + 2);
+  game.field.findCell(x + 4, y + 2).player = game.currentPlayer;
+  game.onMove(x + 4, y + 4);
+  expect(game.infoMessage).toBe(null);
+});
+
+test('infoMessage must not to be in document on correct move', () => {
+  const game = GameTestFactory.create();
+  expect(game.infoMessage).toBe(null);
+  const x = Field.halfCellsInColumn;
+  const y = Field.halfCellsInRow;
+  game.field.findCell(x, y).player = game.currentPlayer;
+  game.field.findCell(x + 4, y + 3).player = game.nextPlayer;
+  game.move(x + 2, y + 2);
+  game.field.findCell(x + 4, y + 2).player = game.currentPlayer;
+  game.onMove(x + 4, y + 4);
+  let contains = false;
+  for (const child of game.document.children) {
+    if (child === game.infoMessage?.document) {
+      contains = true;
+    }
+  }
+  expect(contains).toBe(false);
 });
 
 test('Cells horizontally for current player cell must fill current player after move', () => {
