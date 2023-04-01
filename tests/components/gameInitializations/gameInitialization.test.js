@@ -57,6 +57,28 @@ test('tryGetValue must validate is players stone colors different, if no show wa
   expect(contains).toBe(true);
 });
 
+test('removeWarningMessage remove warning message', () => {
+  const gameInitialization = new GameInitialization();
+  const selectedOption = gameInitialization.player1Initialization.stoneColorInitialization.getSelectedOption();
+  selectedOption.removeAttribute(PlayerStoneColorInitialization.optionSelectedAttributeName);
+  for (const option of gameInitialization.player1Initialization.stoneColorInitialization.selectDocument.children) {
+    if (option.textContent !== selectedOption.textContent) {
+      option.setAttribute(PlayerStoneColorInitialization.optionSelectedAttributeName, '');
+      break;
+    }
+  }
+  gameInitialization.tryGetValue();
+  gameInitialization.removeWarningMessage();
+  let contains = false;
+  for (const child of gameInitialization.document.children) {
+    if (child === gameInitialization.warningMessage?.document) {
+      contains = true;
+    }
+  }
+  expect(gameInitialization.warningMessage).toBe(null);
+  expect(contains).toBe(false);
+});
+
 test('tryGetValue must validate is players stone colors different, if yes return game with players', () => {
   const gameInitialization = new GameInitialization();
   const game = gameInitialization.tryGetValue();

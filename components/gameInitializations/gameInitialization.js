@@ -26,7 +26,15 @@ export class GameInitialization {
     });
   }
 
+  removeWarningMessage(){
+    if (this.warningMessage) {
+      this.document.removeChild(this.warningMessage.document);
+      this.warningMessage = null;
+    }
+  }
+
   tryGetValue(){
+    this.removeWarningMessage();
     if (this.player1Initialization.stoneColorInitialization.getSelectedOption().textContent == this.player2Initialization.stoneColorInitialization.getSelectedOption().textContent) {
       this.warningMessage = new WarningMessage('Can not be the same color');
       this.document.appendChild(this.warningMessage.document);
