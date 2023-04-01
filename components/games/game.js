@@ -76,7 +76,7 @@ export class Game {
       throw new Error('Cannot move if coordinates is out of range');
     }
 
-    if (this.field.findCell(x, y).player) {
+    if (!this.field.findCell(x, y).isEmpty) {
       throw new Error('Cannot move on filled cell');
     }
 
