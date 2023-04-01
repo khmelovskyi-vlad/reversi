@@ -1,4 +1,5 @@
 import { Field } from "../fields/field.js";
+import { SubmitButton } from "../submitButtons/submitButton.js";
 import { WarningMessage } from "../warningMessages/warningMessage.js";
 import { WinningMessage } from "../winningMessages/winningMessage.js";
 
@@ -11,6 +12,7 @@ export class Game {
   player2 = null;
   winnerPlayer = null;
   winningMessage = null;
+  playNext = null;
   wanringMessage = null;
   gameWasStarted = false;
   isGameFinished = false;
@@ -110,9 +112,16 @@ export class Game {
       this.winnerPlayer = this.currentPlayer;
       this.winningMessage = new WinningMessage(`${this.currentPlayer.name} won`);
       this.document.insertBefore(this.winningMessage.document, this.field.document);
+      this.playNext = new SubmitButton('Next');
+      this.playNext.addClickEventListeners([this.onNextClick]);
+      this.document.insertBefore(this.playNext.document, this.field.document);
     }
 
     return this.isGameFinished;
+  }
+
+  onNextClick(){
+    location.reload(true);
   }
 
   pleyerHaveCells(player){

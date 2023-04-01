@@ -2,9 +2,8 @@ export class SubmitButton {
   static classes = ['btn', 'btn-primary'];
   document = null;
   
-  constructor(text, eventListeners){
+  constructor(text){
     this.text = text;
-    this.eventListeners = eventListeners;
     this.initDocument();
   }
 

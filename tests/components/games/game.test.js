@@ -303,6 +303,52 @@ test('winningMessage must be before field in document on finish game', () => {
   expect(elementFound).toBe(2);
 });
 
+test('playNext must be not null on finishing game', () => {
+  const game = GameTestFactory.create();
+  expect(game.playNext).toBe(null);
+  const x = Field.halfCellsInColumn;
+  const y = Field.halfCellsInRow;
+  game.field.findCell(x, y).player = game.currentPlayer;
+  game.move(x + 2, y + 2);
+  expect(game.playNext).not.toBe(null);
+});
+
+test('playNext must be in document on finish game', () => {
+  const game = GameTestFactory.create();
+  const x = Field.halfCellsInColumn;
+  const y = Field.halfCellsInRow;
+  game.field.findCell(x, y).player = game.currentPlayer;
+  game.onMove(x + 2, y + 2);
+  let contains = false;
+  for (const child of game.document.children) {
+    if (child === game.playNext.document) {
+      contains = true;
+    }
+  }
+  expect(contains).toBe(true);
+});
+
+test('playNext must be before field and after winningMessage in document on finish game', () => {
+  const game = GameTestFactory.create();
+  const x = Field.halfCellsInColumn;
+  const y = Field.halfCellsInRow;
+  game.field.findCell(x, y).player = game.currentPlayer;
+  game.onMove(x + 2, y + 2);
+  let elementFound = 0;
+  for (const child of game.document.children) {
+    if (child === game.winningMessage.document) {
+      elementFound++;
+    }
+    else if(elementFound === 1 && child === game.playNext.document){
+      elementFound++;
+    }
+    else if (elementFound === 2 && child === game.field.document) {
+      elementFound++;
+    }
+  }
+  expect(elementFound).toBe(3);
+});
+
 test('warningMessage must not be null on error', () => {
   const game = GameTestFactory.create();
   const x = Field.halfCellsInColumn;
