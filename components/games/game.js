@@ -72,107 +72,146 @@ export class Game {
       throw new Error('Cannot move if game was not started');
     }
 
-    if (x <= 0 || x > Field.cellsInRow || y <= 0 || y > Field.cellsInColumn) {
+    if (x <= 0 || x > Field.cellsInColumn || y <= 0 || y > Field.cellsInRow) {
       throw new Error('Cannot move if coordinates is out of range');
     }
 
-    const turnOverStones = this.turnOverStones(x, y);
-    if (turnOverStones === 0) {
+    const cells = this.turnOverStones(x, y);
+    if (cells.length === 0) {
       throw new Error('Cannot move without turn over any stone');
     }
 
+    this.turnOverCells(cells);
     this.field.fillCell(x, y, this.currentPlayer);
     this.changeCurrentPlayer();
   }
 
-  turnOverStones(x, y){
-    let count = 0;
-    count += this.turnOverHorizontalStones(x, y);
-    count += this.turnOverVerticalStones(x, y);
-    count += this.turnOverDiagonalStones(x, y);
-    return count;
-  }
-
-  turnOverHorizontalStones(x, y){
-    let count = 0;
-    if (x !== 1) {
-      for (let i = x - 1; i >= 1; i--) {
-        if (this.tryTurnOverStone(i, y)) {
-          count++;
-          continue;
-        }
-        break;
-      }
-    }
-    if (x !== Field.cellsInRow) {
-      for (let i = x + 1; i <= Field.cellsInRow; i++) {
-        if (this.tryTurnOverStone(i, y)) {
-          count++;
-          continue;
-        }
-        break;
-      }
-    }
-    return count;
-  }
-
-  turnOverVerticalStones(x, y){
-    let count = 0;
-    if (y !== 1) {
-      for (let i = y - 1; i >= 1; i--) {
-        if (this.tryTurnOverStone(x, i)) {
-          count++;
-          continue;
-        }
-        break;
-      }
-    }
-    if (y !== Field.cellsInColumn) {
-      for (let i = y + 1; i <= Field.cellsInColumn; i++) {
-        if (this.tryTurnOverStone(x, i)) {
-          count++;
-          continue;
-        }
-        break;
-      }
-    }
-    return count;
-  }
-
-  turnOverDiagonalStones(x, y){
-    let count = 0;
-    if (x !== 1 && y !== 1) {
-      for (let i = x - 1; i >= 1; i--) {
-        for (let j = y - 1; j >= 1; j--) {
-          if (this.tryTurnOverStone(i, j)) {
-            count++;
-            continue;
-          }
-          break;
-        }
-      }
-    }
-    if (x !== Field.cellsInRow && x !== Field.cellsInColumn) {
-      for (let i = x + 1; i <= Field.cellsInRow; i++) {
-        for (let j = y + 1; j <= Field.cellsInColumn; j++) {
-          if (this.tryTurnOverStone(i, j)) {
-            count++;
-            continue;
-          }
-          break;
-        }
-      }
-    }
-    return count;
-  }
-
-  tryTurnOverStone(x, y){
-    const cell = this.field.findCell(x, y);
-    if (cell.player === this.nextPlayer) {
+  turnOverCells(cells){
+    cells.forEach(cell => {
       cell.fill(this.currentPlayer);
-      return true;
+    });
+  }
+
+  turnOverStones(x, y){
+    const turnOverCells = [];
+    this.turnOverHorizontalStones(x, y, turnOverCells);
+    this.turnOverVerticalStones(x, y, turnOverCells);
+    this.turnOverDiagonalStones(x, y, turnOverCells);
+    console.log(turnOverCells.length);
+    return turnOverCells;
+  }
+
+  tryTurnOverStone(cell, tempCells, turnOverCells){
+    if (cell.player === this.nextPlayer) {
+      tempCells.push(cell);
+      return false;
     }
-    return false;
+    else if(cell.player === this.currentPlayer){
+      if (tempCells.length > 0) {
+        tempCells.forEach(cell => {
+          turnOverCells.push(cell);
+        });
+      }
+    }
+
+    return true;
+  }
+
+  turnOverHorizontalStones(x, y, turnOverCells){
+    if (x !== 1) {
+      const tempCells = [];
+      for (let i = y - 1; i >= 1; i--) {
+        const cell = this.field.findCell(x, i);
+        if (this.tryTurnOverStone(cell, tempCells, turnOverCells)) {
+          break;
+        }
+      }
+    }
+    if (x !== Field.cellsInColumn) {
+      const tempCells = [];
+      for (let i = y + 1; i <= Field.cellsInColumn; i++) {
+        const cell = this.field.findCell(x, i);
+        if (this.tryTurnOverStone(cell, tempCells, turnOverCells)) {
+          break;
+        }
+      }
+    }
+  }
+
+  turnOverVerticalStones(x, y, turnOverCells){
+    if (y !== 1) {
+      const tempCells = [];
+      for (let i = x - 1; i >= 1; i--) {
+        const cell = this.field.findCell(i, y);
+        if (this.tryTurnOverStone(cell, tempCells, turnOverCells)) {
+          break;
+        }
+      }
+    }
+    if (y !== Field.cellsInRow) {
+      const tempCells = [];
+      for (let i = x + 1; i <= Field.cellsInRow; i++) {
+        const cell = this.field.findCell(i, y);
+        if (this.tryTurnOverStone(cell, tempCells, turnOverCells)) {
+          break;
+        }
+      }
+    }
+  }
+
+  turnOverDiagonalStones(x, y, turnOverCells){
+    if (x !== 1 && y !== 1) {
+      const tempCells = [];
+      let i = x - 1;
+      let j = y - 1;
+      while (i > 1 || j > 1) {
+        const cell = this.field.findCell(i, j);
+        if (this.tryTurnOverStone(cell, tempCells, turnOverCells)) {
+          break;
+        }
+        i--;
+        j--;
+      }
+    }
+    if (x !== Field.cellsInColumn && x !== Field.cellsInRow) {
+      const tempCells = [];
+      let i = x + 1;
+      let j = y + 1;
+      while (i < Field.cellsInColumn || j < Field.cellsInRow) {
+        const cell = this.field.findCell(i, j);
+        if (this.tryTurnOverStone(cell, tempCells, turnOverCells)) {
+          break;
+        }
+        i++;
+        j++;
+      }
+    }
+    if (x !== Field.cellsInColumn && y !== 1) {
+      const tempCells = [];
+      let i = x + 1;
+      let j = y - 1;
+      while (i < Field.cellsInColumn || j > 1) {
+        const cell = this.field.findCell(i, j);
+        if (this.tryTurnOverStone(cell, tempCells, turnOverCells)) {
+          break;
+        }
+        i++;
+        j--;
+      }
+    }
+    if (x !== 1 && y !== Field.cellsInRow) {
+      const tempCells = [];
+      let i = x - 1;
+      let j = y + 1;
+      while (i > 1 || j < Field.cellsInRow) {
+        const cell = this.field.findCell(i, j);
+        if (this.tryTurnOverStone(cell, tempCells, turnOverCells)) {
+          break;
+        }
+        i--;
+        j++;
+      }
+    }
   }
 
   changeCurrentPlayer(){

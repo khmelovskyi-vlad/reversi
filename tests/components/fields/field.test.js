@@ -4,14 +4,14 @@ import { PlayerTestFactory } from "../factories/playerTestFactory.js";
 
 test('field must create correct count of cells', () => {
   const field = FieldTestFactory.create();
-  expect(field.cells.length).toBe(Field.cellsInRow * Field.cellsInColumn);
+  expect(field.cells.length).toBe(Field.cellsInColumn * Field.cellsInRow);
 });
 
 test('field must create cells with correct indexes', () => {
   const field = FieldTestFactory.create();
   let includesAll = true;
-  for (let i = 1; i <= Field.cellsInRow; i++) {
-    for (let j = 1; j <= Field.cellsInColumn; j++) {
+  for (let i = 1; i <= Field.cellsInColumn; i++) {
+    for (let j = 1; j <= Field.cellsInRow; j++) {
         if(!field.isExistCell(i, j)){
             includesAll = false;
         }
@@ -23,17 +23,17 @@ test('field must create cells with correct indexes', () => {
 test('field must create empty cells but not in center', () => {
   const field = FieldTestFactory.create();
   const cellsWithoutCenter = field.cells.filter(cell => 
-    !(cell.x === Field.halfCellsInRow && cell.y === Field.halfCellsInColumn + 1)
-    && !(cell.x === Field.halfCellsInRow + 1 && cell.y === Field.halfCellsInColumn)
-    && !(cell.x === Field.halfCellsInRow + 1 && cell.y === Field.halfCellsInColumn + 1)
-    && !(cell.x === Field.halfCellsInRow && cell.y === Field.halfCellsInColumn));
+    !(cell.x === Field.halfCellsInColumn && cell.y === Field.halfCellsInRow + 1)
+    && !(cell.x === Field.halfCellsInColumn + 1 && cell.y === Field.halfCellsInRow)
+    && !(cell.x === Field.halfCellsInColumn + 1 && cell.y === Field.halfCellsInRow + 1)
+    && !(cell.x === Field.halfCellsInColumn && cell.y === Field.halfCellsInRow));
   expect(cellsWithoutCenter.some(cell => !cell.isEmpty)).toBe(false);
 });
 
 test('On fill cell if cell with selected coordinates is not exist throw exception', () => {
   const field = FieldTestFactory.create();
-  expect(() => field.fillCell(Field.cellsInRow + 1, 1, PlayerTestFactory.create(true))).toThrow(Error);
-  expect(() => field.fillCell(1, Field.cellsInColumn + 1, PlayerTestFactory.create(true))).toThrow(Error);
+  expect(() => field.fillCell(Field.cellsInColumn + 1, 1, PlayerTestFactory.create(true))).toThrow(Error);
+  expect(() => field.fillCell(1, Field.cellsInRow + 1, PlayerTestFactory.create(true))).toThrow(Error);
 });
 
 test('If cell with selected coordinates was filled current player throw exception', () => {
@@ -51,10 +51,10 @@ test('Field must create four fill cells in the middle and other empty cells', ()
   const field = new Field(player1, player2);
   const player1Cells = field.cells.filter(cell => cell.player === player1);
   const player2Cells = field.cells.filter(cell => cell.player === player2);
-  expect(player1Cells.some(cell => cell.x === Field.halfCellsInRow && cell.y === Field.halfCellsInColumn + 1));
-  expect(player1Cells.some(cell => cell.x === Field.halfCellsInRow + 1 && cell.y === Field.halfCellsInColumn));
-  expect(player2Cells.some(cell => cell.x === Field.halfCellsInRow + 1 && cell.y === Field.halfCellsInColumn + 1));
-  expect(player2Cells.some(cell => cell.x === Field.halfCellsInRow && cell.y === Field.halfCellsInColumn));
+  expect(player1Cells.some(cell => cell.x === Field.halfCellsInColumn && cell.y === Field.halfCellsInRow + 1));
+  expect(player1Cells.some(cell => cell.x === Field.halfCellsInColumn + 1 && cell.y === Field.halfCellsInRow));
+  expect(player2Cells.some(cell => cell.x === Field.halfCellsInColumn + 1 && cell.y === Field.halfCellsInRow + 1));
+  expect(player2Cells.some(cell => cell.x === Field.halfCellsInColumn && cell.y === Field.halfCellsInRow));
 });
 
 test('field without players cannot be created', () => {
@@ -70,8 +70,8 @@ test('isExistCell return true if cell with coordinates exists', () => {
 
 test('isExistCell return true if cell with coordinates not exists', () => {
   const field = FieldTestFactory.create();
-  expect(field.isExistCell(Field.cellsInRow + 1, 1)).toBe(false);
-  expect(field.isExistCell(1, Field.cellsInColumn + 1)).toBe(false);
+  expect(field.isExistCell(Field.cellsInColumn + 1, 1)).toBe(false);
+  expect(field.isExistCell(1, Field.cellsInRow + 1)).toBe(false);
 });
 
 test('findCell return cell with coordinates if cell exists', () => {
@@ -83,8 +83,8 @@ test('findCell return cell with coordinates if cell exists', () => {
 
 test('findCell return undefined with coordinates if cell not exists', () => {
   const field = FieldTestFactory.create();
-  const x = Field.cellsInRow + 1;
-  const y = Field.cellsInColumn + 1;
+  const x = Field.cellsInColumn + 1;
+  const y = Field.cellsInRow + 1;
   expect(field.findCell(x, y)).toBe(undefined);
 });
 
@@ -97,7 +97,7 @@ test('field must create document with correct classes', () => {
 
 test('field must create document with cells in row count of children elements', () => {
   const field = FieldTestFactory.create();
-  expect(field.document.children.length).toBe(Field.cellsInRow);
+  expect(field.document.children.length).toBe(Field.cellsInColumn);
 });
 
 test('field must create document with children elements with correct classes', () => {
@@ -112,6 +112,6 @@ test('field must create document with children elements with correct classes', (
 test('field must create document with children elements with cells count equals cells in row', () => {
   const field = FieldTestFactory.create();
   for (const fieldChildDocument of field.document.children) {
-    expect(fieldChildDocument.children.length).toBe(Field.cellsInRow);
+    expect(fieldChildDocument.children.length).toBe(Field.cellsInColumn);
   }
 });

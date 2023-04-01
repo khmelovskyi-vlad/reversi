@@ -20,9 +20,9 @@ export class Field {
             throw new Error('Field without players cannot be created');
         }
         this.initDocument();
-        for (let i = 1; i < Field.cellsInRow + 1; i++) {
+        for (let i = 1; i < Field.cellsInColumn + 1; i++) {
             const childDocument = this.initChildDocument();
-            for (let j = 1; j < Field.cellsInColumn + 1; j++) {
+            for (let j = 1; j < Field.cellsInRow + 1; j++) {
                 const cell = new Cell(i, j, onMove);
                 this.addCell(cell, childDocument);
             }
@@ -53,16 +53,16 @@ export class Field {
 
     initCenterSquare(currentPlayer, anotherPlayer){
         this.cells
-            .find(cell => cell.x === Field.halfCellsInRow && cell.y === Field.halfCellsInColumn + 1)
+            .find(cell => cell.x === Field.halfCellsInColumn && cell.y === Field.halfCellsInRow + 1)
             .fill(currentPlayer);
         this.cells
-            .find(cell => cell.x === Field.halfCellsInRow + 1 && cell.y === Field.halfCellsInColumn)
+            .find(cell => cell.x === Field.halfCellsInColumn + 1 && cell.y === Field.halfCellsInRow)
             .fill(currentPlayer);
         this.cells
-            .find(cell => cell.x === Field.halfCellsInRow + 1 && cell.y === Field.halfCellsInColumn + 1)
+            .find(cell => cell.x === Field.halfCellsInColumn + 1 && cell.y === Field.halfCellsInRow + 1)
             .fill(anotherPlayer);
         this.cells
-            .find(cell => cell.x === Field.halfCellsInRow && cell.y === Field.halfCellsInColumn)
+            .find(cell => cell.x === Field.halfCellsInColumn && cell.y === Field.halfCellsInRow)
             .fill(anotherPlayer);
     }
     
