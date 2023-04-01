@@ -7,6 +7,7 @@ export class Game {
   document = null;
   player1 = null;
   player2 = null;
+  winnerPlayer = null;
   gameWasStarted = false;
   isGameFinished = false;
 
@@ -100,6 +101,7 @@ export class Game {
   detectFinishGame(){
     if (!this.pleyerHaveCells(this.nextPlayer)) {
       this.isGameFinished = true;
+      this.winnerPlayer = this.currentPlayer;
     }
 
     return this.isGameFinished;

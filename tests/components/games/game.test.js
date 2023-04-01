@@ -248,3 +248,14 @@ test('isGameFinished is true when game is finished', () => {
   game.move(x + 2, y + 2);
   expect(game.isGameFinished).toBe(true);
 });
+
+test('winnerPlayer must be correct on finishing game', () => {
+  const game = GameTestFactory.create();
+  const currentPlayer = game.currentPlayer;
+  expect(game.winnerPlayer).toBe(null);
+  const x = Field.halfCellsInColumn;
+  const y = Field.halfCellsInRow;
+  game.field.findCell(x, y).player = game.currentPlayer;
+  game.move(x + 2, y + 2);
+  expect(game.winnerPlayer).toBe(currentPlayer);
+});
