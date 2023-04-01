@@ -14,6 +14,11 @@ test('submit button must create document with correct text', () => {
     .toBe(text);
 });
 
+test('submit button must create document with correct type', () => {
+  const submitButton = new SubmitButton();
+  expect(submitButton.document.type).toBe(SubmitButton.type);
+});
+
 //TODO find how to get event listeners
 // test('submit button must create document with correct event listeners', () => {
 // });

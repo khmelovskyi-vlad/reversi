@@ -1,6 +1,7 @@
 export class SubmitButton {
   static classes = ['btn', 'btn-primary'];
   document = null;
+  static type = 'button';
   
   constructor(text){
     this.text = text;
@@ -12,6 +13,7 @@ export class SubmitButton {
     SubmitButton.classes.forEach(oneClass => {
       this.document.classList.add(oneClass);
     });
+    this.document.type = SubmitButton.type;
     this.document.textContent = this.text;
   }
 
