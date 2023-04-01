@@ -29,6 +29,7 @@ export class GameInitialization {
   tryGetValue(){
     if (this.player1Initialization.stoneColorInitialization.getSelectedOption().textContent == this.player2Initialization.stoneColorInitialization.getSelectedOption().textContent) {
       this.warningMessage = new WarningMessage('Can not be the same color');
+      this.document.appendChild(this.warningMessage.document);
       return null;
     }
     else{
