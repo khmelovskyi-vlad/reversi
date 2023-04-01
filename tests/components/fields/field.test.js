@@ -115,3 +115,13 @@ test('field must create document with children elements with cells count equals 
     expect(fieldChildDocument.children.length).toBe(Field.cellsInColumn);
   }
 });
+
+test('getEmptyCells return not filled cells', () => {
+  const field = FieldTestFactory.create();
+  const emptyCells = field.getEmptyCells(); 
+  expect(emptyCells.length).toBe(Field.cellsInColumn * Field.cellsInRow - 4);
+  expect(emptyCells).not.toContain(field.findCell(Field.halfCellsInColumn, Field.halfCellsInRow + 1));
+  expect(emptyCells).not.toContain(field.findCell(Field.halfCellsInColumn + 1, Field.halfCellsInRow));
+  expect(emptyCells).not.toContain(field.findCell(Field.halfCellsInColumn + 1, Field.halfCellsInRow + 1));
+  expect(emptyCells).not.toContain(field.findCell(Field.halfCellsInColumn, Field.halfCellsInRow));
+});

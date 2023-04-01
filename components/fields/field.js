@@ -81,4 +81,8 @@ export class Field {
     findCell(x, y){
         return this.cells.find(cell => cell.x === x && cell.y === y);
     }
+
+    getEmptyCells(){
+        return this.cells.filter(cell => cell.isEmpty);
+    }
 }
