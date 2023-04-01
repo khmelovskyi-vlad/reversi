@@ -76,6 +76,10 @@ export class Game {
       throw new Error('Cannot move if coordinates is out of range');
     }
 
+    if (this.field.findCell(x, y).player) {
+      throw new Error('Cannot move on filled cell');
+    }
+
     const cells = this.turnOverStones(x, y);
     if (cells.length === 0) {
       throw new Error('Cannot move without turn over any stone');

@@ -140,6 +140,14 @@ test('Cannot move (throw error) coordinates where can not turn over any stone', 
   expect(() => game.move(x, y)).toThrow(Error);
 });
 
+test('Can not move to filled cell', () => {
+  const game = GameTestFactory.create();
+  const x = Field.halfCellsInColumn - 1;
+  const y = Field.halfCellsInRow;
+  game.field.findCell(x, y).player = game.currentPlayer;
+  expect(() => game.move(x + 2, y)).toThrow();
+});
+
 test('Cells horizontally for current player cell must fill current player after move', () => {
   const game = GameTestFactory.create();
   const x = Field.halfCellsInColumn;
