@@ -138,7 +138,7 @@ export class Game {
   }
 
   turnOverHorizontalStones(x, y, turnOverCells){
-    if (x !== 1) {
+    if (y !== 1) {
       const tempCells = [];
       for (let i = y - 1; i >= 1; i--) {
         const cell = this.field.findCell(x, i);
@@ -147,7 +147,7 @@ export class Game {
         }
       }
     }
-    if (x !== Field.cellsInColumn) {
+    if (y !== Field.cellsInColumn) {
       const tempCells = [];
       for (let i = y + 1; i <= Field.cellsInColumn; i++) {
         const cell = this.field.findCell(x, i);
@@ -159,7 +159,7 @@ export class Game {
   }
 
   turnOverVerticalStones(x, y, turnOverCells){
-    if (y !== 1) {
+    if (x !== 1) {
       const tempCells = [];
       for (let i = x - 1; i >= 1; i--) {
         const cell = this.field.findCell(i, y);
@@ -168,7 +168,7 @@ export class Game {
         }
       }
     }
-    if (y !== Field.cellsInRow) {
+    if (x !== Field.cellsInRow) {
       const tempCells = [];
       for (let i = x + 1; i <= Field.cellsInRow; i++) {
         const cell = this.field.findCell(i, y);
@@ -193,7 +193,7 @@ export class Game {
         j--;
       }
     }
-    if (x !== Field.cellsInColumn && x !== Field.cellsInRow) {
+    if (x !== Field.cellsInColumn && y !== Field.cellsInRow) {
       const tempCells = [];
       let i = x + 1;
       let j = y + 1;
